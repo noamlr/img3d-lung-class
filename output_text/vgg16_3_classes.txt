@@ -1,0 +1,1785 @@
+# Split into training/validation and TEST
+
+data_tv, data_test = get_dataset_trainval_test(data, 'vgg_3_classes')
+
+​
+
+X = data_tv.index.to_list()
+
+y = data_tv['int_covid'].to_list()
+
+skf = StratifiedKFold(n_splits=3, shuffle=True)
+
+skf.get_n_splits(X, y)
+
+print(skf)
+
+n_fold = 0
+
+for train_index, validation_index in skf.split(X, y):
+
+    #print("TRAIN:", train_index, "\nTEST:", test_index)
+
+    n_fold += 1
+
+    print("\n\n\nFold", str(n_fold))
+
+    for cur_subfolder in SUB_FILE:
+
+        train_df, validation_df = get_data_set(str(n_fold)+"fold", cur_subfolder, 
+
+                                               data_tv.iloc[train_index, :], data_tv.iloc[validation_index, :])
+
+        print('\n'+cur_subfolder+'\n=====')
+
+        model, SELECTED_MODEL = get_model_vgg16()
+
+        history = train_model(model, train_df, validation_df, EPOCHS, n_fold, cur_subfolder)
+
+        
+
+        #Plot Results
+
+        plot_results(history, cur_subfolder, str(n_fold)+"fold", SELECTED_MODEL)
+
+        
+
+        # Test with other patients
+
+        predictions_by_patient(model, data_test['nome'].to_list(), 
+
+                               'models/'+SELECTED_MODEL+'_legend_'+str(n_fold)+'_'+cur_subfolder, cur_subfolder)
+
+​
+
+StratifiedKFold(n_splits=3, random_state=None, shuffle=True)
+
+
+
+Fold 1
+Train fold with 6642 images
+label
+INDETERMINATE    1394
+NEGATIVE         1394
+POSITIVE         3854
+Name: label, dtype: int64
+
+Validation fold with 3280 images
+label
+INDETERMINATE     738
+NEGATIVE          656
+POSITIVE         1886
+Name: label, dtype: int64
+------------------------------
+
+axis1
+=====
+Model: "sequential_14"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+vgg16 (Model)                (None, 9, 9, 512)         14714688  
+_________________________________________________________________
+global_average_pooling2d_14  (None, 512)               0         
+_________________________________________________________________
+dense_14 (Dense)             (None, 3)                 1539      
+=================================================================
+Total params: 14,716,227
+Trainable params: 14,716,227
+Non-trainable params: 0
+_________________________________________________________________
+Found 6642 validated image filenames belonging to 3 classes.
+Found 3280 validated image filenames belonging to 3 classes.
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/50
+415/415 [==============================] - 313s 754ms/step - loss: 0.2597 - accuracy: 0.8302 - val_loss: 0.6567 - val_accuracy: 0.7744
+Epoch 2/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0605 - accuracy: 0.9765 - val_loss: 0.7487 - val_accuracy: 0.7582
+Epoch 3/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0384 - accuracy: 0.9888 - val_loss: 0.7363 - val_accuracy: 0.7613
+Epoch 4/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0238 - accuracy: 0.9922 - val_loss: 0.7761 - val_accuracy: 0.7857
+Epoch 5/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0152 - accuracy: 0.9958 - val_loss: 1.2032 - val_accuracy: 0.7875
+Epoch 6/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0170 - accuracy: 0.9959 - val_loss: 1.3506 - val_accuracy: 0.7543
+Epoch 7/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0093 - accuracy: 0.9974 - val_loss: 1.2059 - val_accuracy: 0.7805
+Epoch 8/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0075 - accuracy: 0.9974 - val_loss: 1.4650 - val_accuracy: 0.7921
+Epoch 9/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0117 - accuracy: 0.9974 - val_loss: 1.4028 - val_accuracy: 0.7747
+Epoch 10/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0228 - accuracy: 0.9971 - val_loss: 1.4418 - val_accuracy: 0.7777
+Epoch 11/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0062 - accuracy: 0.9985 - val_loss: 1.8706 - val_accuracy: 0.7777
+Epoch 12/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0165 - accuracy: 0.9968 - val_loss: 1.2625 - val_accuracy: 0.7604
+Epoch 13/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0034 - accuracy: 0.9994 - val_loss: 1.6311 - val_accuracy: 0.7412
+Epoch 14/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0097 - accuracy: 0.9988 - val_loss: 2.2752 - val_accuracy: 0.7905
+Epoch 15/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0069 - accuracy: 0.9982 - val_loss: 1.5233 - val_accuracy: 0.7784
+Epoch 16/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0064 - accuracy: 0.9985 - val_loss: 1.8110 - val_accuracy: 0.7701
+Epoch 17/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0039 - accuracy: 0.9989 - val_loss: 1.9273 - val_accuracy: 0.7780
+Epoch 18/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0096 - accuracy: 0.9982 - val_loss: 1.9569 - val_accuracy: 0.7683
+Epoch 19/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0319 - accuracy: 0.9965 - val_loss: 1.5936 - val_accuracy: 0.7335
+Epoch 20/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0011 - accuracy: 0.9997 - val_loss: 2.5437 - val_accuracy: 0.7561
+Epoch 21/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0166 - accuracy: 0.9986 - val_loss: 2.1791 - val_accuracy: 0.7527
+Epoch 22/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0054 - accuracy: 0.9991 - val_loss: 2.2258 - val_accuracy: 0.7741
+Epoch 23/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0106 - accuracy: 0.9979 - val_loss: 2.2174 - val_accuracy: 0.7802
+Epoch 24/50
+415/415 [==============================] - 323s 779ms/step - loss: 9.6852e-04 - accuracy: 0.9997 - val_loss: 8.9414 - val_accuracy: 0.4567
+Epoch 25/50
+415/415 [==============================] - ETA: 0s - loss: 0.0091 - accuracy: 0.9992
+Epoch 00025: saving model to training/vgg16/1fold/axis1/cp-0025.ckpt
+415/415 [==============================] - 323s 779ms/step - loss: 0.0091 - accuracy: 0.9992 - val_loss: 2.5756 - val_accuracy: 0.7591
+Epoch 26/50
+415/415 [==============================] - 323s 779ms/step - loss: 5.0125e-09 - accuracy: 1.0000 - val_loss: 3.1573 - val_accuracy: 0.7701
+Epoch 27/50
+415/415 [==============================] - 323s 778ms/step - loss: 2.8211e-10 - accuracy: 1.0000 - val_loss: 3.2040 - val_accuracy: 0.7744
+Epoch 28/50
+415/415 [==============================] - 323s 779ms/step - loss: 2.2001e-10 - accuracy: 1.0000 - val_loss: 3.2261 - val_accuracy: 0.7805
+Epoch 29/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0091 - accuracy: 0.9992 - val_loss: 2.6180 - val_accuracy: 0.7665
+Epoch 30/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0030 - accuracy: 0.9989 - val_loss: 2.6452 - val_accuracy: 0.7527
+Epoch 31/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0029 - accuracy: 0.9991 - val_loss: 1.7027 - val_accuracy: 0.7604
+Epoch 32/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0053 - accuracy: 0.9988 - val_loss: 2.6258 - val_accuracy: 0.7710
+Epoch 33/50
+415/415 [==============================] - 323s 779ms/step - loss: 6.5128e-04 - accuracy: 0.9997 - val_loss: 3.0810 - val_accuracy: 0.7680
+Epoch 34/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0035 - accuracy: 0.9995 - val_loss: 2.6388 - val_accuracy: 0.7180
+Epoch 35/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0018 - accuracy: 0.9997 - val_loss: 3.5497 - val_accuracy: 0.7780
+Epoch 36/50
+415/415 [==============================] - 323s 779ms/step - loss: 2.0215e-08 - accuracy: 1.0000 - val_loss: 3.3662 - val_accuracy: 0.7668
+Epoch 37/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0011 - accuracy: 0.9997 - val_loss: 2.7874 - val_accuracy: 0.7515
+Epoch 38/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.2985e-08 - accuracy: 1.0000 - val_loss: 3.9627 - val_accuracy: 0.7622
+Epoch 39/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.3379e-10 - accuracy: 1.0000 - val_loss: 4.1864 - val_accuracy: 0.7750
+Epoch 40/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.1490e-09 - accuracy: 1.0000 - val_loss: 4.2909 - val_accuracy: 0.7802
+Epoch 41/50
+415/415 [==============================] - 323s 779ms/step - loss: 8.0915e-11 - accuracy: 1.0000 - val_loss: 4.2566 - val_accuracy: 0.7860
+Epoch 42/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0130 - accuracy: 0.9992 - val_loss: 3.2167 - val_accuracy: 0.7561
+Epoch 43/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.6340e-08 - accuracy: 1.0000 - val_loss: 3.6893 - val_accuracy: 0.7640
+Epoch 44/50
+415/415 [==============================] - 323s 778ms/step - loss: 2.7259e-10 - accuracy: 1.0000 - val_loss: 3.8507 - val_accuracy: 0.7686
+Epoch 45/50
+415/415 [==============================] - 323s 779ms/step - loss: 4.1557e-11 - accuracy: 1.0000 - val_loss: 3.9282 - val_accuracy: 0.7686
+
+Epoch 46/50
+415/415 [==============================] - 323s 779ms/step - loss: 6.1047e-11 - accuracy: 1.0000 - val_loss: 3.9886 - val_accuracy: 0.7710
+Epoch 47/50
+415/415 [==============================] - 323s 778ms/step - loss: 3.3455e-10 - accuracy: 1.0000 - val_loss: 4.4248 - val_accuracy: 0.7845
+Epoch 48/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.2436e-10 - accuracy: 1.0000 - val_loss: 4.3946 - val_accuracy: 0.7799
+Epoch 49/50
+415/415 [==============================] - 323s 779ms/step - loss: 2.4824e-11 - accuracy: 1.0000 - val_loss: 4.4144 - val_accuracy: 0.7832
+Epoch 50/50
+415/415 [==============================] - ETA: 0s - loss: 1.1743e-11 - accuracy: 1.0000
+Epoch 00050: saving model to training/vgg16/1fold/axis1/cp-0050.ckpt
+415/415 [==============================] - 323s 779ms/step - loss: 1.1743e-11 - accuracy: 1.0000 - val_loss: 4.3982 - val_accuracy: 0.7823
+
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Patient number:  C136
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C121
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C13
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C15
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C39
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C87
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C120
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C152
+Axis:  axis1
+loading label legend file
+INDETERMINATE    81
+NEGATIVE          1
+Name: category, dtype: int64
+
+Patient number:  C52
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C38
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C97
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C107
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C99
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Train fold with 6642 images
+label
+INDETERMINATE    1394
+NEGATIVE         1394
+POSITIVE         3854
+Name: label, dtype: int64
+
+Validation fold with 3280 images
+label
+INDETERMINATE     738
+NEGATIVE          656
+POSITIVE         1886
+Name: label, dtype: int64
+------------------------------
+
+axis2
+=====
+Model: "sequential_15"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+vgg16 (Model)                (None, 9, 9, 512)         14714688  
+_________________________________________________________________
+global_average_pooling2d_15  (None, 512)               0         
+_________________________________________________________________
+dense_15 (Dense)             (None, 3)                 1539      
+=================================================================
+Total params: 14,716,227
+Trainable params: 14,716,227
+Non-trainable params: 0
+_________________________________________________________________
+Found 6642 validated image filenames belonging to 3 classes.
+Found 3280 validated image filenames belonging to 3 classes.
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.2537 - accuracy: 0.8295 - val_loss: 0.7502 - val_accuracy: 0.6381
+Epoch 2/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0583 - accuracy: 0.9813 - val_loss: 1.2529 - val_accuracy: 0.7003
+Epoch 3/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0249 - accuracy: 0.9929 - val_loss: 1.1560 - val_accuracy: 0.7247
+Epoch 4/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0243 - accuracy: 0.9941 - val_loss: 2.4676 - val_accuracy: 0.6902
+Epoch 5/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0221 - accuracy: 0.9952 - val_loss: 1.4871 - val_accuracy: 0.7311
+Epoch 6/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0182 - accuracy: 0.9962 - val_loss: 2.3376 - val_accuracy: 0.6744
+Epoch 7/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0162 - accuracy: 0.9962 - val_loss: 2.2489 - val_accuracy: 0.7064
+Epoch 8/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0216 - accuracy: 0.9968 - val_loss: 2.0893 - val_accuracy: 0.7018
+Epoch 9/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0185 - accuracy: 0.9958 - val_loss: 1.4301 - val_accuracy: 0.6784
+Epoch 10/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0087 - accuracy: 0.9986 - val_loss: 2.8038 - val_accuracy: 0.6793
+Epoch 11/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0181 - accuracy: 0.9967 - val_loss: 2.1438 - val_accuracy: 0.6866
+Epoch 12/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0116 - accuracy: 0.9974 - val_loss: 3.0406 - val_accuracy: 0.6680
+Epoch 13/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0152 - accuracy: 0.9976 - val_loss: 2.3885 - val_accuracy: 0.6899
+Epoch 14/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0067 - accuracy: 0.9983 - val_loss: 2.5519 - val_accuracy: 0.7027
+Epoch 15/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0097 - accuracy: 0.9977 - val_loss: 3.4276 - val_accuracy: 0.6628
+Epoch 16/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0221 - accuracy: 0.9985 - val_loss: 2.4009 - val_accuracy: 0.7360
+Epoch 17/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0128 - accuracy: 0.9979 - val_loss: 2.9092 - val_accuracy: 0.7134
+Epoch 18/50
+415/415 [==============================] - 324s 780ms/step - loss: 5.7750e-07 - accuracy: 1.0000 - val_loss: 4.6047 - val_accuracy: 0.6829
+Epoch 19/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0109 - accuracy: 0.9992 - val_loss: 3.4671 - val_accuracy: 0.6713
+Epoch 20/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0120 - accuracy: 0.9982 - val_loss: 3.2119 - val_accuracy: 0.7104
+Epoch 21/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0081 - accuracy: 0.9991 - val_loss: 3.6724 - val_accuracy: 0.6979
+Epoch 22/50
+415/415 [==============================] - 324s 780ms/step - loss: 7.6246e-10 - accuracy: 1.0000 - val_loss: 4.3134 - val_accuracy: 0.6988
+Epoch 23/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0019 - accuracy: 0.9997 - val_loss: 4.9517 - val_accuracy: 0.6686
+Epoch 24/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0040 - accuracy: 0.9994 - val_loss: 2.7174 - val_accuracy: 0.6204
+Epoch 25/50
+415/415 [==============================] - ETA: 0s - loss: 0.0026 - accuracy: 0.9997
+Epoch 00025: saving model to training/vgg16/1fold/axis2/cp-0025.ckpt
+415/415 [==============================] - 323s 779ms/step - loss: 0.0026 - accuracy: 0.9997 - val_loss: 5.4042 - val_accuracy: 0.7195
+Epoch 26/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0144 - accuracy: 0.9986 - val_loss: 5.9798 - val_accuracy: 0.6896
+Epoch 27/50
+415/415 [==============================] - 324s 780ms/step - loss: 7.8392e-04 - accuracy: 0.9998 - val_loss: 4.5474 - val_accuracy: 0.6884
+Epoch 28/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0163 - accuracy: 0.9982 - val_loss: 5.5734 - val_accuracy: 0.6710
+Epoch 29/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0025 - accuracy: 0.9994 - val_loss: 5.5368 - val_accuracy: 0.7024
+Epoch 30/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0148 - accuracy: 0.9979 - val_loss: 6.0156 - val_accuracy: 0.7152
+Epoch 31/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0031 - accuracy: 0.9995 - val_loss: 4.4087 - val_accuracy: 0.6598
+Epoch 32/50
+415/415 [==============================] - 324s 780ms/step - loss: 0.0032 - accuracy: 0.9995 - val_loss: 3.6065 - val_accuracy: 0.7323
+Epoch 33/50
+
+415/415 [==============================] - 323s 779ms/step - loss: 0.0044 - accuracy: 0.9995 - val_loss: 5.6637 - val_accuracy: 0.6357
+Epoch 34/50
+415/415 [==============================] - 324s 780ms/step - loss: 9.0082e-09 - accuracy: 1.0000 - val_loss: 6.3672 - val_accuracy: 0.6805
+Epoch 35/50
+415/415 [==============================] - 324s 780ms/step - loss: 1.3322e-10 - accuracy: 1.0000 - val_loss: 6.5753 - val_accuracy: 0.6695
+Epoch 36/50
+415/415 [==============================] - 323s 779ms/step - loss: 5.3962e-11 - accuracy: 1.0000 - val_loss: 6.6292 - val_accuracy: 0.6680
+Epoch 37/50
+415/415 [==============================] - 323s 779ms/step - loss: 2.9677e-11 - accuracy: 1.0000 - val_loss: 6.5701 - val_accuracy: 0.6777
+Epoch 38/50
+415/415 [==============================] - 324s 780ms/step - loss: 2.2565e-11 - accuracy: 1.0000 - val_loss: 6.6074 - val_accuracy: 0.6726
+Epoch 39/50
+415/415 [==============================] - 324s 780ms/step - loss: 2.1119e-11 - accuracy: 1.0000 - val_loss: 6.6546 - val_accuracy: 0.6723
+Epoch 40/50
+415/415 [==============================] - 324s 780ms/step - loss: 1.2522e-10 - accuracy: 1.0000 - val_loss: 6.7190 - val_accuracy: 0.6625
+Epoch 41/50
+415/415 [==============================] - 323s 779ms/step - loss: 2.0317e-11 - accuracy: 1.0000 - val_loss: 6.6134 - val_accuracy: 0.6665
+Epoch 42/50
+415/415 [==============================] - 323s 779ms/step - loss: 3.1474e-11 - accuracy: 1.0000 - val_loss: 6.7483 - val_accuracy: 0.6665
+Epoch 43/50
+415/415 [==============================] - 324s 780ms/step - loss: 1.9333e-11 - accuracy: 1.0000 - val_loss: 6.7761 - val_accuracy: 0.6683
+Epoch 44/50
+415/415 [==============================] - 324s 780ms/step - loss: 5.8781e-11 - accuracy: 1.0000 - val_loss: 6.3361 - val_accuracy: 0.6619
+Epoch 45/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.5769e-11 - accuracy: 1.0000 - val_loss: 6.4555 - val_accuracy: 0.6640
+Epoch 46/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.0100e-11 - accuracy: 1.0000 - val_loss: 6.4491 - val_accuracy: 0.6692
+Epoch 47/50
+415/415 [==============================] - 324s 780ms/step - loss: 2.0674e-11 - accuracy: 1.0000 - val_loss: 6.4542 - val_accuracy: 0.6659
+Epoch 48/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.5192e-11 - accuracy: 1.0000 - val_loss: 6.4341 - val_accuracy: 0.6677
+Epoch 49/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.2351e-11 - accuracy: 1.0000 - val_loss: 6.5124 - val_accuracy: 0.6659
+Epoch 50/50
+415/415 [==============================] - ETA: 0s - loss: 2.1329e-11 - accuracy: 1.0000
+Epoch 00050: saving model to training/vgg16/1fold/axis2/cp-0050.ckpt
+415/415 [==============================] - 323s 779ms/step - loss: 2.1329e-11 - accuracy: 1.0000 - val_loss: 6.5117 - val_accuracy: 0.6662
+
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Patient number:  C136
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C121
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C13
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C15
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C39
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C87
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C120
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C152
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C52
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C38
+Axis:  axis2
+loading label legend file
+INDETERMINATE    80
+NEGATIVE          2
+Name: category, dtype: int64
+
+Patient number:  C97
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C107
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C99
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Train fold with 6642 images
+label
+INDETERMINATE    1394
+NEGATIVE         1394
+POSITIVE         3854
+Name: label, dtype: int64
+
+Validation fold with 3280 images
+label
+INDETERMINATE     738
+NEGATIVE          656
+POSITIVE         1886
+Name: label, dtype: int64
+------------------------------
+
+axis3
+=====
+Model: "sequential_16"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+vgg16 (Model)                (None, 9, 9, 512)         14714688  
+_________________________________________________________________
+global_average_pooling2d_16  (None, 512)               0         
+_________________________________________________________________
+dense_16 (Dense)             (None, 3)                 1539      
+=================================================================
+Total params: 14,716,227
+Trainable params: 14,716,227
+Non-trainable params: 0
+_________________________________________________________________
+Found 6642 validated image filenames belonging to 3 classes.
+Found 3280 validated image filenames belonging to 3 classes.
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.2083 - accuracy: 0.8695 - val_loss: 1.1652 - val_accuracy: 0.7390
+Epoch 2/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0561 - accuracy: 0.9845 - val_loss: 0.9187 - val_accuracy: 0.8058
+Epoch 3/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0266 - accuracy: 0.9914 - val_loss: 0.9994 - val_accuracy: 0.8168
+Epoch 4/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0197 - accuracy: 0.9940 - val_loss: 0.8963 - val_accuracy: 0.7887
+Epoch 5/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0146 - accuracy: 0.9962 - val_loss: 1.0552 - val_accuracy: 0.8101
+Epoch 6/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0092 - accuracy: 0.9965 - val_loss: 1.4650 - val_accuracy: 0.8085
+Epoch 7/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0115 - accuracy: 0.9970 - val_loss: 1.4626 - val_accuracy: 0.8204
+Epoch 8/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0143 - accuracy: 0.9971 - val_loss: 1.3050 - val_accuracy: 0.7866
+Epoch 9/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0114 - accuracy: 0.9976 - val_loss: 1.3135 - val_accuracy: 0.7945
+Epoch 10/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0074 - accuracy: 0.9976 - val_loss: 1.9705 - val_accuracy: 0.8284
+Epoch 11/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0137 - accuracy: 0.9968 - val_loss: 1.0142 - val_accuracy: 0.8027
+Epoch 12/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0120 - accuracy: 0.9991 - val_loss: 1.9544 - val_accuracy: 0.8250
+Epoch 13/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0098 - accuracy: 0.9986 - val_loss: 2.2988 - val_accuracy: 0.8241
+Epoch 14/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0130 - accuracy: 0.9974 - val_loss: 1.8961 - val_accuracy: 0.8296
+Epoch 15/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0056 - accuracy: 0.9991 - val_loss: 1.4558 - val_accuracy: 0.8131
+Epoch 16/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0048 - accuracy: 0.9994 - val_loss: 1.5039 - val_accuracy: 0.8131
+Epoch 17/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0056 - accuracy: 0.9986 - val_loss: 2.4321 - val_accuracy: 0.8305
+Epoch 18/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0042 - accuracy: 0.9995 - val_loss: 2.2589 - val_accuracy: 0.8186
+Epoch 19/50
+415/415 [==============================] - 323s 779ms/step - loss: 5.5514e-09 - accuracy: 1.0000 - val_loss: 3.4348 - val_accuracy: 0.8332
+Epoch 20/50
+415/415 [==============================] - 323s 779ms/step - loss: 3.6736e-10 - accuracy: 1.0000 - val_loss: 3.6710 - val_accuracy: 0.8332
+Epoch 21/50
+415/415 [==============================] - 323s 779ms/step - loss: 4.0520e-11 - accuracy: 1.0000 - val_loss: 3.6629 - val_accuracy: 0.8323
+Epoch 22/50
+415/415 [==============================] - 323s 778ms/step - loss: 1.1093e-10 - accuracy: 1.0000 - val_loss: 3.7352 - val_accuracy: 0.8332
+Epoch 23/50
+415/415 [==============================] - 323s 778ms/step - loss: 4.9033e-11 - accuracy: 1.0000 - val_loss: 3.7472 - val_accuracy: 0.8302
+Epoch 24/50
+415/415 [==============================] - 323s 779ms/step - loss: 7.1480e-11 - accuracy: 1.0000 - val_loss: 3.7946 - val_accuracy: 0.8329
+Epoch 25/50
+415/415 [==============================] - ETA: 0s - loss: 1.5207e-10 - accuracy: 1.0000
+Epoch 00025: saving model to training/vgg16/1fold/axis3/cp-0025.ckpt
+415/415 [==============================] - 323s 779ms/step - loss: 1.5207e-10 - accuracy: 1.0000 - val_loss: 3.6013 - val_accuracy: 0.8320
+Epoch 26/50
+415/415 [==============================] - 323s 778ms/step - loss: 8.7856e-11 - accuracy: 1.0000 - val_loss: 3.7447 - val_accuracy: 0.8345
+Epoch 27/50
+415/415 [==============================] - 323s 779ms/step - loss: 4.3524e-11 - accuracy: 1.0000 - val_loss: 3.7403 - val_accuracy: 0.8329
+Epoch 28/50
+415/415 [==============================] - 323s 779ms/step - loss: 3.0747e-10 - accuracy: 1.0000 - val_loss: 3.6196 - val_accuracy: 0.8290
+Epoch 29/50
+415/415 [==============================] - 323s 778ms/step - loss: 4.8172e-11 - accuracy: 1.0000 - val_loss: 3.6650 - val_accuracy: 0.8293
+Epoch 30/50
+415/415 [==============================] - 323s 778ms/step - loss: 0.0029 - accuracy: 0.9995 - val_loss: 1.5374 - val_accuracy: 0.7835
+Epoch 31/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0018 - accuracy: 0.9995 - val_loss: 2.7978 - val_accuracy: 0.8216
+Epoch 32/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0049 - accuracy: 0.9992 - val_loss: 2.1548 - val_accuracy: 0.8046
+Epoch 33/50
+
+415/415 [==============================] - 323s 778ms/step - loss: 0.0058 - accuracy: 0.9991 - val_loss: 1.9598 - val_accuracy: 0.8232
+Epoch 34/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0035 - accuracy: 0.9994 - val_loss: 2.9138 - val_accuracy: 0.8180
+Epoch 35/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.4852e-09 - accuracy: 1.0000 - val_loss: 3.3015 - val_accuracy: 0.8183
+Epoch 36/50
+415/415 [==============================] - 323s 779ms/step - loss: 2.2982e-09 - accuracy: 1.0000 - val_loss: 3.3282 - val_accuracy: 0.8088
+Epoch 37/50
+415/415 [==============================] - 323s 778ms/step - loss: 1.6727e-09 - accuracy: 1.0000 - val_loss: 4.0089 - val_accuracy: 0.8220
+Epoch 38/50
+415/415 [==============================] - 323s 779ms/step - loss: 0.0035 - accuracy: 0.9994 - val_loss: 2.9990 - val_accuracy: 0.8186
+Epoch 39/50
+415/415 [==============================] - 323s 778ms/step - loss: 7.5873e-09 - accuracy: 1.0000 - val_loss: 3.7057 - val_accuracy: 0.8021
+Epoch 40/50
+415/415 [==============================] - 323s 779ms/step - loss: 3.8030e-10 - accuracy: 1.0000 - val_loss: 3.6043 - val_accuracy: 0.8137
+Epoch 41/50
+415/415 [==============================] - 324s 780ms/step - loss: 9.1663e-11 - accuracy: 1.0000 - val_loss: 3.8149 - val_accuracy: 0.8201
+Epoch 42/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.7176e-11 - accuracy: 1.0000 - val_loss: 3.9166 - val_accuracy: 0.8189
+Epoch 43/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.7425e-10 - accuracy: 1.0000 - val_loss: 4.3003 - val_accuracy: 0.8143
+Epoch 44/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.5977e-10 - accuracy: 1.0000 - val_loss: 3.9874 - val_accuracy: 0.8165
+Epoch 45/50
+415/415 [==============================] - 323s 779ms/step - loss: 9.2425e-12 - accuracy: 1.0000 - val_loss: 3.9786 - val_accuracy: 0.8171
+Epoch 46/50
+415/415 [==============================] - 324s 781ms/step - loss: 2.5607e-10 - accuracy: 1.0000 - val_loss: 4.5005 - val_accuracy: 0.8186
+Epoch 47/50
+415/415 [==============================] - 324s 780ms/step - loss: 1.0769e-10 - accuracy: 1.0000 - val_loss: 4.4419 - val_accuracy: 0.8220
+Epoch 48/50
+415/415 [==============================] - 323s 779ms/step - loss: 1.2864e-11 - accuracy: 1.0000 - val_loss: 4.4341 - val_accuracy: 0.8241
+Epoch 49/50
+415/415 [==============================] - 323s 779ms/step - loss: 3.5154e-11 - accuracy: 1.0000 - val_loss: 4.2790 - val_accuracy: 0.8210
+Epoch 50/50
+415/415 [==============================] - ETA: 0s - loss: 1.0667e-10 - accuracy: 1.0000
+Epoch 00050: saving model to training/vgg16/1fold/axis3/cp-0050.ckpt
+415/415 [==============================] - 323s 779ms/step - loss: 1.0667e-10 - accuracy: 1.0000 - val_loss: 3.8176 - val_accuracy: 0.8134
+
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Patient number:  C136
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C121
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C13
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C15
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C39
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C87
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C120
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C152
+Axis:  axis3
+loading label legend file
+INDETERMINATE    81
+NEGATIVE          1
+Name: category, dtype: int64
+
+Patient number:  C52
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C38
+Axis:  axis3
+loading label legend file
+NEGATIVE         67
+INDETERMINATE    15
+Name: category, dtype: int64
+
+Patient number:  C97
+Axis:  axis3
+loading label legend file
+NEGATIVE         56
+INDETERMINATE    26
+Name: category, dtype: int64
+
+Patient number:  C107
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C99
+Axis:  axis3
+loading label legend file
+NEGATIVE         76
+INDETERMINATE     6
+Name: category, dtype: int64
+
+Train fold with 6642 images
+label
+INDETERMINATE    1394
+NEGATIVE         1394
+POSITIVE         3854
+Name: label, dtype: int64
+
+Validation fold with 3280 images
+label
+INDETERMINATE     738
+NEGATIVE          656
+POSITIVE         1886
+Name: label, dtype: int64
+------------------------------
+
+axis4
+=====
+Model: "sequential_17"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+vgg16 (Model)                (None, 9, 9, 512)         14714688  
+_________________________________________________________________
+global_average_pooling2d_17  (None, 512)               0         
+_________________________________________________________________
+dense_17 (Dense)             (None, 3)                 1539      
+=================================================================
+Total params: 14,716,227
+Trainable params: 14,716,227
+Non-trainable params: 0
+_________________________________________________________________
+Found 6642 validated image filenames belonging to 3 classes.
+Found 3280 validated image filenames belonging to 3 classes.
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/50
+415/415 [==============================] - 330s 794ms/step - loss: 0.2271 - accuracy: 0.8557 - val_loss: 0.4785 - val_accuracy: 0.7994
+Epoch 2/50
+415/415 [==============================] - 331s 797ms/step - loss: 0.0528 - accuracy: 0.9846 - val_loss: 0.8516 - val_accuracy: 0.7768
+Epoch 3/50
+415/415 [==============================] - 331s 798ms/step - loss: 0.0232 - accuracy: 0.9926 - val_loss: 1.0782 - val_accuracy: 0.8238
+Epoch 4/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0265 - accuracy: 0.9941 - val_loss: 1.0151 - val_accuracy: 0.8122
+Epoch 5/50
+415/415 [==============================] - 330s 794ms/step - loss: 0.0148 - accuracy: 0.9961 - val_loss: 1.0993 - val_accuracy: 0.7643
+Epoch 6/50
+415/415 [==============================] - 329s 792ms/step - loss: 0.0126 - accuracy: 0.9974 - val_loss: 1.1686 - val_accuracy: 0.8326
+Epoch 7/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0192 - accuracy: 0.9967 - val_loss: 0.9859 - val_accuracy: 0.8369
+Epoch 8/50
+415/415 [==============================] - 329s 794ms/step - loss: 0.0181 - accuracy: 0.9968 - val_loss: 0.8633 - val_accuracy: 0.8405
+Epoch 9/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0177 - accuracy: 0.9974 - val_loss: 1.3855 - val_accuracy: 0.7957
+Epoch 10/50
+415/415 [==============================] - 331s 798ms/step - loss: 0.0093 - accuracy: 0.9988 - val_loss: 1.1503 - val_accuracy: 0.8378
+Epoch 11/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0089 - accuracy: 0.9977 - val_loss: 1.6794 - val_accuracy: 0.8232
+Epoch 12/50
+415/415 [==============================] - 329s 793ms/step - loss: 0.0220 - accuracy: 0.9973 - val_loss: 1.3906 - val_accuracy: 0.8095
+Epoch 13/50
+415/415 [==============================] - 331s 798ms/step - loss: 0.0090 - accuracy: 0.9988 - val_loss: 1.1923 - val_accuracy: 0.8244
+Epoch 14/50
+415/415 [==============================] - 329s 794ms/step - loss: 0.0118 - accuracy: 0.9974 - val_loss: 1.6303 - val_accuracy: 0.7982
+Epoch 15/50
+415/415 [==============================] - 329s 794ms/step - loss: 0.0048 - accuracy: 0.9986 - val_loss: 1.6262 - val_accuracy: 0.8207
+Epoch 16/50
+415/415 [==============================] - 329s 793ms/step - loss: 0.0083 - accuracy: 0.9983 - val_loss: 2.3311 - val_accuracy: 0.7790
+Epoch 17/50
+415/415 [==============================] - 329s 793ms/step - loss: 0.0045 - accuracy: 0.9986 - val_loss: 2.7727 - val_accuracy: 0.7710
+Epoch 18/50
+415/415 [==============================] - 328s 791ms/step - loss: 0.0170 - accuracy: 0.9974 - val_loss: 3.4862 - val_accuracy: 0.7747
+Epoch 19/50
+415/415 [==============================] - 331s 797ms/step - loss: 0.0135 - accuracy: 0.9991 - val_loss: 2.5421 - val_accuracy: 0.7997
+Epoch 20/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0023 - accuracy: 0.9994 - val_loss: 3.2614 - val_accuracy: 0.8247
+Epoch 21/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0169 - accuracy: 0.9982 - val_loss: 2.2810 - val_accuracy: 0.8168
+Epoch 22/50
+415/415 [==============================] - 330s 794ms/step - loss: 7.0294e-09 - accuracy: 1.0000 - val_loss: 2.5277 - val_accuracy: 0.8186
+Epoch 23/50
+415/415 [==============================] - 329s 792ms/step - loss: 1.7947e-10 - accuracy: 1.0000 - val_loss: 2.5458 - val_accuracy: 0.8256
+Epoch 24/50
+415/415 [==============================] - 330s 796ms/step - loss: 1.4065e-09 - accuracy: 1.0000 - val_loss: 2.8042 - val_accuracy: 0.8311
+Epoch 25/50
+415/415 [==============================] - ETA: 0s - loss: 6.4956e-11 - accuracy: 1.0000
+Epoch 00025: saving model to training/vgg16/1fold/axis4/cp-0025.ckpt
+415/415 [==============================] - 331s 797ms/step - loss: 6.4956e-11 - accuracy: 1.0000 - val_loss: 2.8646 - val_accuracy: 0.8256
+Epoch 26/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0102 - accuracy: 0.9986 - val_loss: 2.6681 - val_accuracy: 0.7872
+Epoch 27/50
+415/415 [==============================] - 329s 793ms/step - loss: 0.0079 - accuracy: 0.9988 - val_loss: 2.4614 - val_accuracy: 0.7918
+Epoch 28/50
+415/415 [==============================] - 329s 792ms/step - loss: 0.0111 - accuracy: 0.9980 - val_loss: 1.3588 - val_accuracy: 0.8006
+Epoch 29/50
+415/415 [==============================] - 329s 794ms/step - loss: 0.0036 - accuracy: 0.9991 - val_loss: 2.9795 - val_accuracy: 0.7966
+Epoch 30/50
+415/415 [==============================] - 331s 797ms/step - loss: 0.0051 - accuracy: 0.9988 - val_loss: 2.2019 - val_accuracy: 0.8085
+Epoch 31/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0153 - accuracy: 0.9991 - val_loss: 2.4639 - val_accuracy: 0.8268
+Epoch 32/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0083 - accuracy: 0.9985 - val_loss: 1.8159 - val_accuracy: 0.8232
+Epoch 33/50
+
+415/415 [==============================] - 330s 794ms/step - loss: 0.0063 - accuracy: 0.9995 - val_loss: 1.7977 - val_accuracy: 0.8436
+Epoch 34/50
+415/415 [==============================] - 330s 795ms/step - loss: 0.0017 - accuracy: 0.9995 - val_loss: 2.7981 - val_accuracy: 0.8244
+Epoch 35/50
+415/415 [==============================] - 329s 793ms/step - loss: 4.0300e-10 - accuracy: 1.0000 - val_loss: 2.6528 - val_accuracy: 0.8271
+Epoch 36/50
+415/415 [==============================] - 332s 800ms/step - loss: 3.1703e-11 - accuracy: 1.0000 - val_loss: 2.6492 - val_accuracy: 0.8277
+Epoch 37/50
+415/415 [==============================] - 329s 793ms/step - loss: 7.8689e-11 - accuracy: 1.0000 - val_loss: 2.7625 - val_accuracy: 0.8241
+Epoch 38/50
+415/415 [==============================] - 329s 793ms/step - loss: 4.9214e-11 - accuracy: 1.0000 - val_loss: 2.8221 - val_accuracy: 0.8259
+Epoch 39/50
+415/415 [==============================] - 330s 795ms/step - loss: 9.6078e-11 - accuracy: 1.0000 - val_loss: 3.0180 - val_accuracy: 0.8247
+Epoch 40/50
+415/415 [==============================] - 331s 797ms/step - loss: 0.0039 - accuracy: 0.9991 - val_loss: 2.0529 - val_accuracy: 0.8055
+Epoch 41/50
+415/415 [==============================] - 330s 796ms/step - loss: 0.0079 - accuracy: 0.9989 - val_loss: 2.6483 - val_accuracy: 0.8076
+Epoch 42/50
+415/415 [==============================] - 331s 798ms/step - loss: 0.0038 - accuracy: 0.9992 - val_loss: 2.5078 - val_accuracy: 0.8082
+Epoch 43/50
+415/415 [==============================] - 330s 796ms/step - loss: 0.0022 - accuracy: 0.9994 - val_loss: 4.2743 - val_accuracy: 0.7899
+Epoch 44/50
+415/415 [==============================] - 330s 794ms/step - loss: 0.0053 - accuracy: 0.9995 - val_loss: 2.5577 - val_accuracy: 0.7988
+Epoch 45/50
+415/415 [==============================] - 330s 795ms/step - loss: 7.6870e-09 - accuracy: 1.0000 - val_loss: 3.8216 - val_accuracy: 0.8021
+Epoch 46/50
+415/415 [==============================] - 330s 794ms/step - loss: 9.8320e-11 - accuracy: 1.0000 - val_loss: 3.8337 - val_accuracy: 0.8049
+Epoch 47/50
+415/415 [==============================] - 330s 795ms/step - loss: 1.5270e-10 - accuracy: 1.0000 - val_loss: 3.5696 - val_accuracy: 0.8088
+Epoch 48/50
+415/415 [==============================] - 330s 794ms/step - loss: 0.0024 - accuracy: 0.9994 - val_loss: 2.1087 - val_accuracy: 0.7951
+Epoch 49/50
+415/415 [==============================] - 330s 794ms/step - loss: 2.9731e-09 - accuracy: 1.0000 - val_loss: 2.6018 - val_accuracy: 0.7970
+Epoch 50/50
+415/415 [==============================] - ETA: 0s - loss: 0.0040 - accuracy: 0.9991
+Epoch 00050: saving model to training/vgg16/1fold/axis4/cp-0050.ckpt
+415/415 [==============================] - 329s 793ms/step - loss: 0.0040 - accuracy: 0.9991 - val_loss: 1.7738 - val_accuracy: 0.8284
+
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Patient number:  C136
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C121
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C13
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C15
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C39
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C87
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C120
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C152
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C52
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C38
+Axis:  axis4
+loading label legend file
+NEGATIVE         77
+INDETERMINATE     5
+Name: category, dtype: int64
+
+Patient number:  C97
+Axis:  axis4
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C107
+Axis:  axis4
+loading label legend file
+INDETERMINATE    69
+NEGATIVE         13
+Name: category, dtype: int64
+
+Patient number:  C99
+Axis:  axis4
+loading label legend file
+NEGATIVE         77
+INDETERMINATE     5
+Name: category, dtype: int64
+
+
+
+
+Fold 2
+Train fold with 6478 images
+label
+INDETERMINATE    1394
+NEGATIVE         1394
+POSITIVE         3690
+Name: label, dtype: int64
+
+Validation fold with 3444 images
+label
+INDETERMINATE     738
+NEGATIVE          656
+POSITIVE         2050
+Name: label, dtype: int64
+------------------------------
+
+axis1
+=====
+Model: "sequential_18"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+vgg16 (Model)                (None, 9, 9, 512)         14714688  
+_________________________________________________________________
+global_average_pooling2d_18  (None, 512)               0         
+_________________________________________________________________
+dense_18 (Dense)             (None, 3)                 1539      
+=================================================================
+Total params: 14,716,227
+Trainable params: 14,716,227
+Non-trainable params: 0
+_________________________________________________________________
+Found 6478 validated image filenames belonging to 3 classes.
+Found 3444 validated image filenames belonging to 3 classes.
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/50
+404/404 [==============================] - 344s 851ms/step - loss: 0.2572 - accuracy: 0.8336 - val_loss: 0.5258 - val_accuracy: 0.7663
+Epoch 2/50
+404/404 [==============================] - 344s 852ms/step - loss: 0.0670 - accuracy: 0.9728 - val_loss: 0.7671 - val_accuracy: 0.7267
+Epoch 3/50
+404/404 [==============================] - 344s 852ms/step - loss: 0.0357 - accuracy: 0.9901 - val_loss: 0.6581 - val_accuracy: 0.7634
+Epoch 4/50
+404/404 [==============================] - 343s 849ms/step - loss: 0.0239 - accuracy: 0.9927 - val_loss: 0.8705 - val_accuracy: 0.7770
+Epoch 5/50
+404/404 [==============================] - 342s 846ms/step - loss: 0.0196 - accuracy: 0.9952 - val_loss: 1.2696 - val_accuracy: 0.7785
+Epoch 6/50
+404/404 [==============================] - 344s 851ms/step - loss: 0.0161 - accuracy: 0.9966 - val_loss: 1.2475 - val_accuracy: 0.7849
+Epoch 7/50
+404/404 [==============================] - 343s 850ms/step - loss: 0.0263 - accuracy: 0.9957 - val_loss: 1.0790 - val_accuracy: 0.7698
+Epoch 8/50
+404/404 [==============================] - 340s 841ms/step - loss: 0.0124 - accuracy: 0.9974 - val_loss: 1.3411 - val_accuracy: 0.7831
+Epoch 9/50
+404/404 [==============================] - 343s 849ms/step - loss: 0.0068 - accuracy: 0.9974 - val_loss: 1.3343 - val_accuracy: 0.7695
+Epoch 10/50
+404/404 [==============================] - 342s 847ms/step - loss: 0.0088 - accuracy: 0.9980 - val_loss: 1.5904 - val_accuracy: 0.7866
+Epoch 11/50
+404/404 [==============================] - 344s 852ms/step - loss: 0.0065 - accuracy: 0.9991 - val_loss: 1.8432 - val_accuracy: 0.7541
+Epoch 12/50
+404/404 [==============================] - 343s 848ms/step - loss: 0.0039 - accuracy: 0.9985 - val_loss: 2.1593 - val_accuracy: 0.7828
+Epoch 13/50
+404/404 [==============================] - 342s 847ms/step - loss: 0.0105 - accuracy: 0.9983 - val_loss: 1.7885 - val_accuracy: 0.7686
+Epoch 14/50
+404/404 [==============================] - 342s 848ms/step - loss: 0.0107 - accuracy: 0.9977 - val_loss: 1.6351 - val_accuracy: 0.7826
+Epoch 15/50
+404/404 [==============================] - 343s 849ms/step - loss: 0.0101 - accuracy: 0.9983 - val_loss: 1.5565 - val_accuracy: 0.7840
+Epoch 16/50
+404/404 [==============================] - 346s 856ms/step - loss: 0.0073 - accuracy: 0.9992 - val_loss: 3.5992 - val_accuracy: 0.7523
+Epoch 17/50
+404/404 [==============================] - 342s 847ms/step - loss: 0.0084 - accuracy: 0.9980 - val_loss: 1.6813 - val_accuracy: 0.7922
+Epoch 18/50
+404/404 [==============================] - 345s 855ms/step - loss: 0.0036 - accuracy: 0.9992 - val_loss: 1.8976 - val_accuracy: 0.7858
+Epoch 19/50
+404/404 [==============================] - 344s 851ms/step - loss: 0.0080 - accuracy: 0.9988 - val_loss: 2.4732 - val_accuracy: 0.7552
+Epoch 20/50
+404/404 [==============================] - 343s 849ms/step - loss: 0.0103 - accuracy: 0.9985 - val_loss: 1.1969 - val_accuracy: 0.7831
+Epoch 21/50
+404/404 [==============================] - 344s 852ms/step - loss: 0.0033 - accuracy: 0.9989 - val_loss: 3.4222 - val_accuracy: 0.7628
+Epoch 22/50
+404/404 [==============================] - 343s 850ms/step - loss: 0.0115 - accuracy: 0.9986 - val_loss: 2.0486 - val_accuracy: 0.7834
+Epoch 23/50
+404/404 [==============================] - 344s 851ms/step - loss: 0.0021 - accuracy: 0.9995 - val_loss: 2.5661 - val_accuracy: 0.7834
+Epoch 24/50
+404/404 [==============================] - 344s 851ms/step - loss: 0.0055 - accuracy: 0.9995 - val_loss: 2.6785 - val_accuracy: 0.7779
+Epoch 25/50
+404/404 [==============================] - ETA: 0s - loss: 4.9100e-10 - accuracy: 1.0000
+Epoch 00025: saving model to training/vgg16/2fold/axis1/cp-0025.ckpt
+404/404 [==============================] - 344s 852ms/step - loss: 4.9100e-10 - accuracy: 1.0000 - val_loss: 2.5989 - val_accuracy: 0.7765
+Epoch 26/50
+404/404 [==============================] - 342s 848ms/step - loss: 0.0107 - accuracy: 0.9992 - val_loss: 1.3118 - val_accuracy: 0.7709
+Epoch 27/50
+404/404 [==============================] - 342s 847ms/step - loss: 0.0032 - accuracy: 0.9994 - val_loss: 1.8711 - val_accuracy: 0.7828
+Epoch 28/50
+404/404 [==============================] - 343s 848ms/step - loss: 0.0048 - accuracy: 0.9991 - val_loss: 1.6496 - val_accuracy: 0.7744
+Epoch 29/50
+404/404 [==============================] - 345s 855ms/step - loss: 0.0039 - accuracy: 0.9992 - val_loss: 2.1221 - val_accuracy: 0.7887
+Epoch 30/50
+404/404 [==============================] - 345s 855ms/step - loss: 0.0012 - accuracy: 0.9997 - val_loss: 2.1895 - val_accuracy: 0.7727
+Epoch 31/50
+404/404 [==============================] - 320s 792ms/step - loss: 0.0031 - accuracy: 0.9995 - val_loss: 1.8949 - val_accuracy: 0.7703
+Epoch 32/50
+404/404 [==============================] - 321s 794ms/step - loss: 6.6687e-08 - accuracy: 1.0000 - val_loss: 2.4154 - val_accuracy: 0.7860
+Epoch 33/50
+
+404/404 [==============================] - 319s 791ms/step - loss: 8.0334e-10 - accuracy: 1.0000 - val_loss: 2.8347 - val_accuracy: 0.7846
+Epoch 34/50
+404/404 [==============================] - 319s 790ms/step - loss: 3.2714e-10 - accuracy: 1.0000 - val_loss: 3.0194 - val_accuracy: 0.7814
+Epoch 35/50
+404/404 [==============================] - 320s 791ms/step - loss: 1.0440e-10 - accuracy: 1.0000 - val_loss: 2.9381 - val_accuracy: 0.7852
+Epoch 36/50
+404/404 [==============================] - 320s 792ms/step - loss: 6.3497e-11 - accuracy: 1.0000 - val_loss: 2.9402 - val_accuracy: 0.7828
+Epoch 37/50
+404/404 [==============================] - 320s 791ms/step - loss: 8.5024e-11 - accuracy: 1.0000 - val_loss: 2.8481 - val_accuracy: 0.7852
+Epoch 38/50
+404/404 [==============================] - 319s 790ms/step - loss: 1.3465e-10 - accuracy: 1.0000 - val_loss: 2.7647 - val_accuracy: 0.7869
+Epoch 39/50
+404/404 [==============================] - 320s 791ms/step - loss: 1.8762e-11 - accuracy: 1.0000 - val_loss: 2.7294 - val_accuracy: 0.7834
+Epoch 40/50
+404/404 [==============================] - 320s 793ms/step - loss: 9.6017e-11 - accuracy: 1.0000 - val_loss: 2.7436 - val_accuracy: 0.7823
+Epoch 41/50
+404/404 [==============================] - 320s 791ms/step - loss: 6.6397e-11 - accuracy: 1.0000 - val_loss: 2.7158 - val_accuracy: 0.7849
+Epoch 42/50
+404/404 [==============================] - 320s 792ms/step - loss: 6.7013e-11 - accuracy: 1.0000 - val_loss: 2.7353 - val_accuracy: 0.7840
+Epoch 43/50
+404/404 [==============================] - 321s 795ms/step - loss: 3.5591e-11 - accuracy: 1.0000 - val_loss: 2.7494 - val_accuracy: 0.7823
+Epoch 44/50
+404/404 [==============================] - 319s 791ms/step - loss: 2.1124e-11 - accuracy: 1.0000 - val_loss: 2.7791 - val_accuracy: 0.7872
+Epoch 45/50
+404/404 [==============================] - 320s 791ms/step - loss: 2.7479e-11 - accuracy: 1.0000 - val_loss: 2.7337 - val_accuracy: 0.7858
+Epoch 46/50
+404/404 [==============================] - 319s 790ms/step - loss: 2.2837e-11 - accuracy: 1.0000 - val_loss: 2.7971 - val_accuracy: 0.7863
+Epoch 47/50
+404/404 [==============================] - 322s 797ms/step - loss: 1.0496e-10 - accuracy: 1.0000 - val_loss: 2.7453 - val_accuracy: 0.7872
+Epoch 48/50
+404/404 [==============================] - 320s 791ms/step - loss: 0.0244 - accuracy: 0.9989 - val_loss: 2.7067 - val_accuracy: 0.7730
+Epoch 49/50
+404/404 [==============================] - 320s 792ms/step - loss: 0.0031 - accuracy: 0.9997 - val_loss: 2.6496 - val_accuracy: 0.7680
+Epoch 50/50
+404/404 [==============================] - ETA: 0s - loss: 0.0058 - accuracy: 0.9994
+Epoch 00050: saving model to training/vgg16/2fold/axis1/cp-0050.ckpt
+404/404 [==============================] - 319s 791ms/step - loss: 0.0058 - accuracy: 0.9994 - val_loss: 2.8614 - val_accuracy: 0.7779
+
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Patient number:  C136
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C121
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C13
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C15
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C39
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C87
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C120
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C152
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C52
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C38
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C97
+Axis:  axis1
+loading label legend file
+INDETERMINATE    60
+NEGATIVE         22
+Name: category, dtype: int64
+
+Patient number:  C107
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C99
+Axis:  axis1
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Train fold with 6478 images
+label
+INDETERMINATE    1394
+NEGATIVE         1394
+POSITIVE         3690
+Name: label, dtype: int64
+
+Validation fold with 3444 images
+label
+INDETERMINATE     738
+NEGATIVE          656
+POSITIVE         2050
+Name: label, dtype: int64
+------------------------------
+
+axis2
+=====
+Model: "sequential_19"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+vgg16 (Model)                (None, 9, 9, 512)         14714688  
+_________________________________________________________________
+global_average_pooling2d_19  (None, 512)               0         
+_________________________________________________________________
+dense_19 (Dense)             (None, 3)                 1539      
+=================================================================
+Total params: 14,716,227
+Trainable params: 14,716,227
+Non-trainable params: 0
+_________________________________________________________________
+Found 6478 validated image filenames belonging to 3 classes.
+Found 3444 validated image filenames belonging to 3 classes.
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/50
+404/404 [==============================] - 330s 816ms/step - loss: 0.2514 - accuracy: 0.8386 - val_loss: 0.6859 - val_accuracy: 0.7160
+Epoch 2/50
+404/404 [==============================] - 331s 819ms/step - loss: 0.0606 - accuracy: 0.9731 - val_loss: 0.8230 - val_accuracy: 0.7035
+Epoch 3/50
+404/404 [==============================] - 330s 817ms/step - loss: 0.0355 - accuracy: 0.9885 - val_loss: 1.4014 - val_accuracy: 0.7073
+Epoch 4/50
+404/404 [==============================] - 331s 820ms/step - loss: 0.0285 - accuracy: 0.9946 - val_loss: 1.3592 - val_accuracy: 0.7145
+Epoch 5/50
+404/404 [==============================] - 332s 821ms/step - loss: 0.0331 - accuracy: 0.9946 - val_loss: 1.1152 - val_accuracy: 0.7328
+Epoch 6/50
+404/404 [==============================] - 329s 815ms/step - loss: 0.0109 - accuracy: 0.9963 - val_loss: 1.5106 - val_accuracy: 0.7462
+Epoch 7/50
+404/404 [==============================] - 330s 817ms/step - loss: 0.0166 - accuracy: 0.9966 - val_loss: 1.0346 - val_accuracy: 0.7561
+Epoch 8/50
+404/404 [==============================] - 331s 820ms/step - loss: 0.0082 - accuracy: 0.9983 - val_loss: 2.0396 - val_accuracy: 0.7349
+Epoch 9/50
+404/404 [==============================] - 330s 817ms/step - loss: 0.0109 - accuracy: 0.9971 - val_loss: 1.7646 - val_accuracy: 0.7122
+Epoch 10/50
+404/404 [==============================] - 331s 820ms/step - loss: 0.0102 - accuracy: 0.9981 - val_loss: 2.0960 - val_accuracy: 0.7366
+Epoch 11/50
+404/404 [==============================] - 329s 815ms/step - loss: 0.0124 - accuracy: 0.9974 - val_loss: 2.9086 - val_accuracy: 0.6916
+Epoch 12/50
+404/404 [==============================] - 330s 818ms/step - loss: 0.0049 - accuracy: 0.9986 - val_loss: 1.4507 - val_accuracy: 0.7352
+Epoch 13/50
+404/404 [==============================] - 332s 822ms/step - loss: 0.0109 - accuracy: 0.9981 - val_loss: 1.1606 - val_accuracy: 0.7544
+Epoch 14/50
+404/404 [==============================] - 330s 817ms/step - loss: 0.0012 - accuracy: 0.9995 - val_loss: 3.3087 - val_accuracy: 0.7323
+Epoch 15/50
+404/404 [==============================] - 331s 821ms/step - loss: 0.0091 - accuracy: 0.9995 - val_loss: 2.8278 - val_accuracy: 0.6541
+Epoch 16/50
+404/404 [==============================] - 331s 820ms/step - loss: 0.0021 - accuracy: 0.9994 - val_loss: 3.0240 - val_accuracy: 0.7605
+Epoch 17/50
+404/404 [==============================] - 331s 818ms/step - loss: 0.0177 - accuracy: 0.9991 - val_loss: 3.0847 - val_accuracy: 0.7012
+Epoch 18/50
+404/404 [==============================] - 331s 818ms/step - loss: 0.0087 - accuracy: 0.9986 - val_loss: 1.6302 - val_accuracy: 0.7174
+Epoch 19/50
+404/404 [==============================] - 331s 820ms/step - loss: 0.0014 - accuracy: 0.9997 - val_loss: 3.3899 - val_accuracy: 0.7413
+Epoch 20/50
+404/404 [==============================] - 331s 818ms/step - loss: 5.7232e-09 - accuracy: 1.0000 - val_loss: 3.8951 - val_accuracy: 0.7285
+Epoch 21/50
+404/404 [==============================] - 329s 815ms/step - loss: 6.1154e-10 - accuracy: 1.0000 - val_loss: 4.0893 - val_accuracy: 0.7299
+Epoch 22/50
+404/404 [==============================] - 332s 823ms/step - loss: 1.6950e-09 - accuracy: 1.0000 - val_loss: 4.3851 - val_accuracy: 0.7241
+Epoch 23/50
+404/404 [==============================] - 331s 820ms/step - loss: 4.7843e-11 - accuracy: 1.0000 - val_loss: 4.4523 - val_accuracy: 0.7238
+Epoch 24/50
+404/404 [==============================] - 331s 819ms/step - loss: 2.8353e-10 - accuracy: 1.0000 - val_loss: 4.2099 - val_accuracy: 0.7317
+Epoch 25/50
+404/404 [==============================] - ETA: 0s - loss: 0.0117 - accuracy: 0.9989
+Epoch 00025: saving model to training/vgg16/2fold/axis2/cp-0025.ckpt
+404/404 [==============================] - 330s 817ms/step - loss: 0.0117 - accuracy: 0.9989 - val_loss: 3.5236 - val_accuracy: 0.7096
+Epoch 26/50
+404/404 [==============================] - 330s 816ms/step - loss: 0.0081 - accuracy: 0.9988 - val_loss: 2.3381 - val_accuracy: 0.7195
+Epoch 27/50
+404/404 [==============================] - 330s 818ms/step - loss: 0.0018 - accuracy: 0.9997 - val_loss: 3.1231 - val_accuracy: 0.7494
+Epoch 28/50
+404/404 [==============================] - 332s 821ms/step - loss: 8.5435e-10 - accuracy: 1.0000 - val_loss: 3.2488 - val_accuracy: 0.7509
+Epoch 29/50
+404/404 [==============================] - 329s 814ms/step - loss: 2.9006e-09 - accuracy: 1.0000 - val_loss: 3.4633 - val_accuracy: 0.7366
+Epoch 30/50
+404/404 [==============================] - 330s 817ms/step - loss: 4.3978e-10 - accuracy: 1.0000 - val_loss: 3.6982 - val_accuracy: 0.7302
+Epoch 31/50
+404/404 [==============================] - 331s 820ms/step - loss: 2.4671e-09 - accuracy: 1.0000 - val_loss: 4.1461 - val_accuracy: 0.7256
+Epoch 32/50
+404/404 [==============================] - 332s 821ms/step - loss: 1.6732e-10 - accuracy: 1.0000 - val_loss: 4.1369 - val_accuracy: 0.7250
+Epoch 33/50
+
+404/404 [==============================] - 330s 817ms/step - loss: 1.2392e-10 - accuracy: 1.0000 - val_loss: 4.1468 - val_accuracy: 0.7256
+Epoch 34/50
+404/404 [==============================] - 329s 815ms/step - loss: 4.1503e-10 - accuracy: 1.0000 - val_loss: 3.8536 - val_accuracy: 0.7326
+Epoch 35/50
+404/404 [==============================] - 331s 819ms/step - loss: 2.5288e-10 - accuracy: 1.0000 - val_loss: 3.9520 - val_accuracy: 0.7337
+Epoch 36/50
+404/404 [==============================] - 329s 814ms/step - loss: 6.6290e-10 - accuracy: 1.0000 - val_loss: 4.1086 - val_accuracy: 0.7358
+Epoch 37/50
+404/404 [==============================] - 329s 814ms/step - loss: 6.7888e-11 - accuracy: 1.0000 - val_loss: 4.0146 - val_accuracy: 0.7433
+Epoch 38/50
+404/404 [==============================] - 330s 817ms/step - loss: 9.8038e-12 - accuracy: 1.0000 - val_loss: 4.0702 - val_accuracy: 0.7381
+Epoch 39/50
+404/404 [==============================] - 331s 820ms/step - loss: 3.2038e-11 - accuracy: 1.0000 - val_loss: 4.0043 - val_accuracy: 0.7372
+Epoch 40/50
+404/404 [==============================] - 332s 821ms/step - loss: 3.0058e-11 - accuracy: 1.0000 - val_loss: 4.0367 - val_accuracy: 0.7366
+Epoch 41/50
+404/404 [==============================] - 328s 812ms/step - loss: 2.1598e-11 - accuracy: 1.0000 - val_loss: 4.0580 - val_accuracy: 0.7392
+Epoch 42/50
+404/404 [==============================] - 331s 819ms/step - loss: 1.2688e-11 - accuracy: 1.0000 - val_loss: 4.0805 - val_accuracy: 0.7360
+Epoch 43/50
+404/404 [==============================] - 328s 813ms/step - loss: 0.0174 - accuracy: 0.9980 - val_loss: 2.2457 - val_accuracy: 0.6948
+Epoch 44/50
+404/404 [==============================] - 331s 819ms/step - loss: 0.0070 - accuracy: 0.9988 - val_loss: 2.0624 - val_accuracy: 0.7413
+Epoch 45/50
+404/404 [==============================] - 329s 813ms/step - loss: 0.0057 - accuracy: 0.9986 - val_loss: 3.5125 - val_accuracy: 0.6814
+Epoch 46/50
+404/404 [==============================] - 331s 820ms/step - loss: 1.4083e-05 - accuracy: 1.0000 - val_loss: 4.4776 - val_accuracy: 0.7235
+Epoch 47/50
+404/404 [==============================] - 330s 818ms/step - loss: 3.2428e-10 - accuracy: 1.0000 - val_loss: 4.4045 - val_accuracy: 0.7267
+Epoch 48/50
+404/404 [==============================] - 330s 817ms/step - loss: 2.7434e-10 - accuracy: 1.0000 - val_loss: 4.6683 - val_accuracy: 0.7209
+Epoch 49/50
+404/404 [==============================] - 329s 814ms/step - loss: 1.5727e-10 - accuracy: 1.0000 - val_loss: 4.7307 - val_accuracy: 0.7227
+Epoch 50/50
+404/404 [==============================] - ETA: 0s - loss: 2.9942e-11 - accuracy: 1.0000
+Epoch 00050: saving model to training/vgg16/2fold/axis2/cp-0050.ckpt
+404/404 [==============================] - 332s 821ms/step - loss: 2.9942e-11 - accuracy: 1.0000 - val_loss: 4.6603 - val_accuracy: 0.7241
+
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Patient number:  C136
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C121
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C13
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C15
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C39
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C87
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C120
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C152
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C52
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C38
+Axis:  axis2
+loading label legend file
+NEGATIVE    82
+Name: category, dtype: int64
+
+Patient number:  C97
+Axis:  axis2
+loading label legend file
+NEGATIVE    82
+Name: category, dtype: int64
+
+Patient number:  C107
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C99
+Axis:  axis2
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Train fold with 6478 images
+label
+INDETERMINATE    1394
+NEGATIVE         1394
+POSITIVE         3690
+Name: label, dtype: int64
+
+Validation fold with 3444 images
+label
+INDETERMINATE     738
+NEGATIVE          656
+POSITIVE         2050
+Name: label, dtype: int64
+------------------------------
+
+axis3
+=====
+Model: "sequential_20"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+vgg16 (Model)                (None, 9, 9, 512)         14714688  
+_________________________________________________________________
+global_average_pooling2d_20  (None, 512)               0         
+_________________________________________________________________
+dense_20 (Dense)             (None, 3)                 1539      
+=================================================================
+Total params: 14,716,227
+Trainable params: 14,716,227
+Non-trainable params: 0
+_________________________________________________________________
+Found 6478 validated image filenames belonging to 3 classes.
+Found 3444 validated image filenames belonging to 3 classes.
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.2245 - accuracy: 0.8627 - val_loss: 0.5279 - val_accuracy: 0.7340
+Epoch 2/50
+404/404 [==============================] - 352s 871ms/step - loss: 0.0492 - accuracy: 0.9824 - val_loss: 0.8170 - val_accuracy: 0.7430
+Epoch 3/50
+404/404 [==============================] - 353s 873ms/step - loss: 0.0295 - accuracy: 0.9918 - val_loss: 0.8042 - val_accuracy: 0.7262
+Epoch 4/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0161 - accuracy: 0.9955 - val_loss: 1.5871 - val_accuracy: 0.7317
+Epoch 5/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0235 - accuracy: 0.9957 - val_loss: 1.3036 - val_accuracy: 0.7378
+Epoch 6/50
+404/404 [==============================] - 353s 873ms/step - loss: 0.0168 - accuracy: 0.9975 - val_loss: 1.5144 - val_accuracy: 0.7323
+Epoch 7/50
+404/404 [==============================] - 352s 873ms/step - loss: 0.0191 - accuracy: 0.9975 - val_loss: 1.7435 - val_accuracy: 0.7334
+Epoch 8/50
+404/404 [==============================] - 352s 871ms/step - loss: 0.0144 - accuracy: 0.9975 - val_loss: 2.3966 - val_accuracy: 0.7314
+Epoch 9/50
+404/404 [==============================] - 352s 871ms/step - loss: 0.0082 - accuracy: 0.9977 - val_loss: 1.5592 - val_accuracy: 0.7381
+Epoch 10/50
+404/404 [==============================] - 352s 871ms/step - loss: 0.0042 - accuracy: 0.9994 - val_loss: 1.7983 - val_accuracy: 0.7308
+Epoch 11/50
+404/404 [==============================] - 352s 870ms/step - loss: 0.0102 - accuracy: 0.9974 - val_loss: 3.0224 - val_accuracy: 0.7308
+Epoch 12/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0075 - accuracy: 0.9985 - val_loss: 2.2563 - val_accuracy: 0.7305
+Epoch 13/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0100 - accuracy: 0.9988 - val_loss: 3.1641 - val_accuracy: 0.7404
+Epoch 14/50
+404/404 [==============================] - 352s 871ms/step - loss: 0.0154 - accuracy: 0.9981 - val_loss: 2.2951 - val_accuracy: 0.7227
+Epoch 15/50
+404/404 [==============================] - 352s 870ms/step - loss: 0.0127 - accuracy: 0.9985 - val_loss: 3.6621 - val_accuracy: 0.7215
+Epoch 16/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0048 - accuracy: 0.9992 - val_loss: 2.9521 - val_accuracy: 0.7195
+Epoch 17/50
+404/404 [==============================] - 353s 873ms/step - loss: 0.0067 - accuracy: 0.9994 - val_loss: 2.6457 - val_accuracy: 0.7125
+Epoch 18/50
+404/404 [==============================] - 352s 872ms/step - loss: 4.9484e-04 - accuracy: 1.0000 - val_loss: 3.5329 - val_accuracy: 0.7375
+Epoch 19/50
+404/404 [==============================] - 352s 871ms/step - loss: 0.0120 - accuracy: 0.9992 - val_loss: 2.9677 - val_accuracy: 0.7392
+Epoch 20/50
+404/404 [==============================] - 352s 871ms/step - loss: 0.0022 - accuracy: 0.9997 - val_loss: 2.7493 - val_accuracy: 0.7247
+Epoch 21/50
+404/404 [==============================] - 352s 871ms/step - loss: 0.0065 - accuracy: 0.9977 - val_loss: 2.3029 - val_accuracy: 0.7407
+Epoch 22/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0051 - accuracy: 0.9988 - val_loss: 3.0925 - val_accuracy: 0.7372
+Epoch 23/50
+404/404 [==============================] - 352s 871ms/step - loss: 0.0177 - accuracy: 0.9991 - val_loss: 2.5993 - val_accuracy: 0.7392
+Epoch 24/50
+404/404 [==============================] - 352s 870ms/step - loss: 0.0018 - accuracy: 0.9992 - val_loss: 3.6138 - val_accuracy: 0.7346
+Epoch 25/50
+404/404 [==============================] - ETA: 0s - loss: 0.0045 - accuracy: 0.9992
+Epoch 00025: saving model to training/vgg16/2fold/axis3/cp-0025.ckpt
+404/404 [==============================] - 352s 872ms/step - loss: 0.0045 - accuracy: 0.9992 - val_loss: 2.9773 - val_accuracy: 0.7509
+Epoch 26/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0081 - accuracy: 0.9991 - val_loss: 2.4079 - val_accuracy: 0.7311
+Epoch 27/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0054 - accuracy: 0.9995 - val_loss: 3.6164 - val_accuracy: 0.7230
+Epoch 28/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0087 - accuracy: 0.9991 - val_loss: 1.4165 - val_accuracy: 0.7500
+Epoch 29/50
+404/404 [==============================] - 353s 873ms/step - loss: 0.0035 - accuracy: 0.9994 - val_loss: 3.3073 - val_accuracy: 0.7523
+Epoch 30/50
+404/404 [==============================] - 351s 870ms/step - loss: 0.0019 - accuracy: 0.9998 - val_loss: 3.9231 - val_accuracy: 0.7494
+Epoch 31/50
+404/404 [==============================] - 353s 873ms/step - loss: 0.0031 - accuracy: 0.9994 - val_loss: 4.0571 - val_accuracy: 0.7384
+Epoch 32/50
+404/404 [==============================] - 352s 872ms/step - loss: 4.9538e-09 - accuracy: 1.0000 - val_loss: 4.3157 - val_accuracy: 0.7410
+Epoch 33/50
+404/404 [==============================] - 352s 872ms/step - loss: 0.0038 - accuracy: 0.9994 - val_loss: 2.5967 - val_accuracy: 0.7625
+
+Epoch 34/50
+404/404 [==============================] - 352s 871ms/step - loss: 8.9939e-09 - accuracy: 1.0000 - val_loss: 3.5546 - val_accuracy: 0.7384
+Epoch 35/50
+404/404 [==============================] - 353s 873ms/step - loss: 1.7593e-09 - accuracy: 1.0000 - val_loss: 4.8644 - val_accuracy: 0.7352
+Epoch 36/50
+404/404 [==============================] - 353s 873ms/step - loss: 4.9820e-11 - accuracy: 1.0000 - val_loss: 4.7260 - val_accuracy: 0.7422
+Epoch 37/50
+404/404 [==============================] - 353s 873ms/step - loss: 1.5315e-10 - accuracy: 1.0000 - val_loss: 4.3996 - val_accuracy: 0.7419
+Epoch 38/50
+404/404 [==============================] - 352s 872ms/step - loss: 1.1314e-10 - accuracy: 1.0000 - val_loss: 4.3779 - val_accuracy: 0.7456
+Epoch 39/50
+404/404 [==============================] - 352s 871ms/step - loss: 8.5087e-11 - accuracy: 1.0000 - val_loss: 4.5377 - val_accuracy: 0.7369
+Epoch 40/50
+404/404 [==============================] - 353s 873ms/step - loss: 6.8382e-11 - accuracy: 1.0000 - val_loss: 4.4686 - val_accuracy: 0.7384
+Epoch 41/50
+404/404 [==============================] - 352s 870ms/step - loss: 1.5736e-11 - accuracy: 1.0000 - val_loss: 4.5138 - val_accuracy: 0.7372
+Epoch 42/50
+404/404 [==============================] - 352s 872ms/step - loss: 8.0496e-12 - accuracy: 1.0000 - val_loss: 4.4770 - val_accuracy: 0.7392
+Epoch 43/50
+404/404 [==============================] - 352s 871ms/step - loss: 3.0987e-11 - accuracy: 1.0000 - val_loss: 4.4511 - val_accuracy: 0.7398
+Epoch 44/50
+404/404 [==============================] - 353s 873ms/step - loss: 1.3054e-11 - accuracy: 1.0000 - val_loss: 4.4812 - val_accuracy: 0.7390
+Epoch 45/50
+404/404 [==============================] - 352s 872ms/step - loss: 2.7718e-09 - accuracy: 1.0000 - val_loss: 4.7497 - val_accuracy: 0.7410
+Epoch 46/50
+404/404 [==============================] - 352s 871ms/step - loss: 6.8052e-11 - accuracy: 1.0000 - val_loss: 4.7640 - val_accuracy: 0.7381
+Epoch 47/50
+404/404 [==============================] - 353s 874ms/step - loss: 1.9420e-10 - accuracy: 1.0000 - val_loss: 4.4639 - val_accuracy: 0.7515
+Epoch 48/50
+404/404 [==============================] - 353s 875ms/step - loss: 3.3733e-11 - accuracy: 1.0000 - val_loss: 4.4702 - val_accuracy: 0.7436
+Epoch 49/50
+404/404 [==============================] - 352s 872ms/step - loss: 3.2728e-11 - accuracy: 1.0000 - val_loss: 4.4985 - val_accuracy: 0.7465
+Epoch 50/50
+404/404 [==============================] - ETA: 0s - loss: 1.5300e-11 - accuracy: 1.0000
+Epoch 00050: saving model to training/vgg16/2fold/axis3/cp-0050.ckpt
+404/404 [==============================] - 352s 872ms/step - loss: 1.5300e-11 - accuracy: 1.0000 - val_loss: 4.4533 - val_accuracy: 0.7433
+
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Found 82 validated image filenames.
+Patient number:  C136
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C121
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C13
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C15
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C39
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C87
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C120
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C152
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C52
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C38
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C97
+Axis:  axis3
+loading label legend file
+NEGATIVE    82
+Name: category, dtype: int64
+
+Patient number:  C107
+Axis:  axis3
+loading label legend file
+INDETERMINATE    82
+Name: category, dtype: int64
+
+Patient number:  C99
+Axis:  axis3
+loading label legend file
+NEGATIVE         54
+INDETERMINATE    28
+Name: category, dtype: int64
+
+Train fold with 6478 images
+label
+INDETERMINATE    1394
+NEGATIVE         1394
+POSITIVE         3690
+Name: label, dtype: int64
+
+Validation fold with 3444 images
+label
+INDETERMINATE     738
+NEGATIVE          656
+POSITIVE         2050
+Name: label, dtype: int64
+------------------------------
+
+axis4
+=====
+Model: "sequential_21"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+vgg16 (Model)                (None, 9, 9, 512)         14714688  
+_________________________________________________________________
+global_average_pooling2d_21  (None, 512)               0         
+_________________________________________________________________
+dense_21 (Dense)             (None, 3)                 1539      
+=================================================================
+Total params: 14,716,227
+Trainable params: 14,716,227
+Non-trainable params: 0
+_________________________________________________________________
+Found 6478 validated image filenames belonging to 3 classes.
+Found 3444 validated image filenames belonging to 3 classes.
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/50
+404/404 [==============================] - 354s 875ms/step - loss: 0.2265 - accuracy: 0.8547 - val_loss: 0.7630 - val_accuracy: 0.7587
+Epoch 2/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0547 - accuracy: 0.9757 - val_loss: 1.0025 - val_accuracy: 0.7474
+Epoch 3/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0290 - accuracy: 0.9926 - val_loss: 0.6106 - val_accuracy: 0.7858
+Epoch 4/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0223 - accuracy: 0.9950 - val_loss: 1.1473 - val_accuracy: 0.7762
+Epoch 5/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0142 - accuracy: 0.9972 - val_loss: 1.6563 - val_accuracy: 0.7698
+Epoch 6/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0356 - accuracy: 0.9955 - val_loss: 0.8996 - val_accuracy: 0.7640
+Epoch 7/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0057 - accuracy: 0.9988 - val_loss: 1.4567 - val_accuracy: 0.7387
+Epoch 8/50
+404/404 [==============================] - 354s 875ms/step - loss: 0.0042 - accuracy: 0.9989 - val_loss: 2.0834 - val_accuracy: 0.7785
+Epoch 9/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0057 - accuracy: 0.9983 - val_loss: 2.0714 - val_accuracy: 0.7663
+Epoch 10/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0435 - accuracy: 0.9978 - val_loss: 2.3378 - val_accuracy: 0.7753
+Epoch 11/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0068 - accuracy: 0.9985 - val_loss: 1.1805 - val_accuracy: 0.7500
+Epoch 12/50
+404/404 [==============================] - 354s 876ms/step - loss: 9.4113e-04 - accuracy: 0.9997 - val_loss: 2.9417 - val_accuracy: 0.7953
+Epoch 13/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0324 - accuracy: 0.9981 - val_loss: 1.8464 - val_accuracy: 0.7622
+Epoch 14/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0033 - accuracy: 0.9995 - val_loss: 3.0823 - val_accuracy: 0.7788
+Epoch 15/50
+404/404 [==============================] - 354s 875ms/step - loss: 0.0261 - accuracy: 0.9981 - val_loss: 2.8070 - val_accuracy: 0.7730
+Epoch 16/50
+404/404 [==============================] - 354s 876ms/step - loss: 5.5929e-09 - accuracy: 1.0000 - val_loss: 3.3168 - val_accuracy: 0.7770
+Epoch 17/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0025 - accuracy: 0.9995 - val_loss: 3.0013 - val_accuracy: 0.7808
+Epoch 18/50
+404/404 [==============================] - 354s 876ms/step - loss: 6.8351e-10 - accuracy: 1.0000 - val_loss: 3.4916 - val_accuracy: 0.7744
+Epoch 19/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0100 - accuracy: 0.9988 - val_loss: 2.4297 - val_accuracy: 0.7779
+Epoch 20/50
+404/404 [==============================] - 354s 875ms/step - loss: 0.0206 - accuracy: 0.9988 - val_loss: 1.8732 - val_accuracy: 0.7608
+Epoch 21/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0013 - accuracy: 0.9997 - val_loss: 3.7762 - val_accuracy: 0.7733
+Epoch 22/50
+404/404 [==============================] - 354s 876ms/step - loss: 9.0555e-10 - accuracy: 1.0000 - val_loss: 3.8995 - val_accuracy: 0.7648
+Epoch 23/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0085 - accuracy: 0.9988 - val_loss: 2.3411 - val_accuracy: 0.7581
+Epoch 24/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0103 - accuracy: 0.9981 - val_loss: 2.0447 - val_accuracy: 0.7701
+Epoch 25/50
+404/404 [==============================] - ETA: 0s - loss: 3.0127e-07 - accuracy: 1.0000
+Epoch 00025: saving model to training/vgg16/2fold/axis4/cp-0025.ckpt
+404/404 [==============================] - 354s 876ms/step - loss: 3.0127e-07 - accuracy: 1.0000 - val_loss: 3.6482 - val_accuracy: 0.7735
+Epoch 26/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0110 - accuracy: 0.9989 - val_loss: 2.2849 - val_accuracy: 0.7733
+Epoch 27/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0084 - accuracy: 0.9981 - val_loss: 1.9247 - val_accuracy: 0.7314
+Epoch 28/50
+404/404 [==============================] - 354s 876ms/step - loss: 0.0047 - accuracy: 0.9986 - val_loss: 1.8256 - val_accuracy: 0.7648
+Epoch 29/50
+141/404 [=========>....................] - ETA: 3:16 - loss: 8.4955e-06 - accuracy: 1.0000

@@ -1,1 +1,6 @@
+csv/input/2*
 env-cnn/
+images/*
+logs/*
+models/*
+training/*
