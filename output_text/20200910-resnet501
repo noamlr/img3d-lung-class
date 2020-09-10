@@ -1026,6 +1026,9 @@ Axis:  axis2
 
 
 
+
+
+
 Fold 5
 Train fold with 9348 images
 label
@@ -1042,19 +1045,37 @@ Name: label, dtype: int64
 
 axis2
 =====
-Model: "sequential_19"
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.iter
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.decay
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.learning_rate
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.momentum
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.rho
+WARNING:tensorflow:A checkpoint was restored (e.g. tf.train.Checkpoint.restore or tf.keras.Model.load_weights) but not all checkpointed values were used. See above for specific issues. Use expect_partial() on the load status object, e.g. tf.train.Checkpoint.restore(...).expect_partial(), to silence these warnings, or use assert_consumed() to make the check explicit. See https://www.tensorflow.org/guide/checkpoint#loading_mechanics for details.
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.iter
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.decay
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.learning_rate
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.momentum
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.rho
+WARNING:tensorflow:A checkpoint was restored (e.g. tf.train.Checkpoint.restore or tf.keras.Model.load_weights) but not all checkpointed values were used. See above for specific issues. Use expect_partial() on the load status object, e.g. tf.train.Checkpoint.restore(...).expect_partial(), to silence these warnings, or use assert_consumed() to make the check explicit. See https://www.tensorflow.org/guide/checkpoint#loading_mechanics for details.
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.iter
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.decay
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.learning_rate
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.momentum
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.rho
+WARNING:tensorflow:A checkpoint was restored (e.g. tf.train.Checkpoint.restore or tf.keras.Model.load_weights) but not all checkpointed values were used. See above for specific issues. Use expect_partial() on the load status object, e.g. tf.train.Checkpoint.restore(...).expect_partial(), to silence these warnings, or use assert_consumed() to make the check explicit. See https://www.tensorflow.org/guide/checkpoint#loading_mechanics for details.
+Model: "sequential_15"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
 resnet50 (Model)             (None, 10, 10, 2048)      23587712  
 _________________________________________________________________
-dense_37 (Dense)             (None, 10, 10, 1024)      2098176   
+dense_15 (Dense)             (None, 10, 10, 1024)      2098176   
 _________________________________________________________________
-dense_38 (Dense)             (None, 10, 10, 1024)      1049600   
+dense_16 (Dense)             (None, 10, 10, 1024)      1049600   
 _________________________________________________________________
-global_average_pooling2d_19  (None, 1024)              0         
+global_average_pooling2d_15  (None, 1024)              0         
 _________________________________________________________________
-dense_39 (Dense)             (None, 2)                 2050      
+dense_17 (Dense)             (None, 2)                 2050      
 =================================================================
 Total params: 26,737,538
 Trainable params: 26,684,418
@@ -1066,95 +1087,50 @@ Found 2870 validated image filenames belonging to 2 classes.
 {'NEGATIVE': 0, 'POSITIVE': 1}
 WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
 Epoch 1/20
-  3/584 [..............................] - ETA: 3:36 - loss: 0.7742 - accuracy: 0.5417
-
----------------------------------------------------------------------------
-ResourceExhaustedError                    Traceback (most recent call last)
-<ipython-input-16-fd98a4af5645> in <module>
-     10 #         model, SELECTED_MODEL = get_model_vgg16()
-     11         model, SELECTED_MODEL = get_model_resnet50()
----> 12         history = train_model(model, train_df, validation_df, EPOCHS, n_fold, axis)
-     13 
-     14         #Plot Results
-
-<ipython-input-12-25ea89fdad1b> in train_model(model, train_df, validation_df, epochs, fold, axis)
-     72         validation_data=validation_generator,
-     73         validation_steps=step_size_validation,
----> 74         callbacks=cp_callback
-     75                        )
-     76 
-
-~/Documents/noa/cidia19/jupyter/env-cnn/lib/python3.7/site-packages/tensorflow/python/keras/engine/training.py in _method_wrapper(self, *args, **kwargs)
-     64   def _method_wrapper(self, *args, **kwargs):
-     65     if not self._in_multi_worker_mode():  # pylint: disable=protected-access
----> 66       return method(self, *args, **kwargs)
-     67 
-     68     # Running inside `run_distribute_coordinator` already.
-
-~/Documents/noa/cidia19/jupyter/env-cnn/lib/python3.7/site-packages/tensorflow/python/keras/engine/training.py in fit(self, x, y, batch_size, epochs, verbose, callbacks, validation_split, validation_data, shuffle, class_weight, sample_weight, initial_epoch, steps_per_epoch, validation_steps, validation_batch_size, validation_freq, max_queue_size, workers, use_multiprocessing)
-    846                 batch_size=batch_size):
-    847               callbacks.on_train_batch_begin(step)
---> 848               tmp_logs = train_function(iterator)
-    849               # Catch OutOfRangeError for Datasets of unknown size.
-    850               # This blocks until the batch has finished executing.
-
-~/Documents/noa/cidia19/jupyter/env-cnn/lib/python3.7/site-packages/tensorflow/python/eager/def_function.py in __call__(self, *args, **kwds)
-    578         xla_context.Exit()
-    579     else:
---> 580       result = self._call(*args, **kwds)
-    581 
-    582     if tracing_count == self._get_tracing_count():
-
-~/Documents/noa/cidia19/jupyter/env-cnn/lib/python3.7/site-packages/tensorflow/python/eager/def_function.py in _call(self, *args, **kwds)
-    609       # In this case we have created variables on the first call, so we run the
-    610       # defunned version which is guaranteed to never create variables.
---> 611       return self._stateless_fn(*args, **kwds)  # pylint: disable=not-callable
-    612     elif self._stateful_fn is not None:
-    613       # Release the lock early so that multiple threads can perform the call
-
-~/Documents/noa/cidia19/jupyter/env-cnn/lib/python3.7/site-packages/tensorflow/python/eager/function.py in __call__(self, *args, **kwargs)
-   2418     with self._lock:
-   2419       graph_function, args, kwargs = self._maybe_define_function(args, kwargs)
--> 2420     return graph_function._filtered_call(args, kwargs)  # pylint: disable=protected-access
-   2421 
-   2422   @property
-
-~/Documents/noa/cidia19/jupyter/env-cnn/lib/python3.7/site-packages/tensorflow/python/eager/function.py in _filtered_call(self, args, kwargs)
-   1663          if isinstance(t, (ops.Tensor,
-   1664                            resource_variable_ops.BaseResourceVariable))),
--> 1665         self.captured_inputs)
-   1666 
-   1667   def _call_flat(self, args, captured_inputs, cancellation_manager=None):
-
-~/Documents/noa/cidia19/jupyter/env-cnn/lib/python3.7/site-packages/tensorflow/python/eager/function.py in _call_flat(self, args, captured_inputs, cancellation_manager)
-   1744       # No tape is watching; skip to running the function.
-   1745       return self._build_call_outputs(self._inference_function.call(
--> 1746           ctx, args, cancellation_manager=cancellation_manager))
-   1747     forward_backward = self._select_forward_and_backward_functions(
-   1748         args,
-
-~/Documents/noa/cidia19/jupyter/env-cnn/lib/python3.7/site-packages/tensorflow/python/eager/function.py in call(self, ctx, args, cancellation_manager)
-    596               inputs=args,
-    597               attrs=attrs,
---> 598               ctx=ctx)
-    599         else:
-    600           outputs = execute.execute_with_cancellation(
-
-~/Documents/noa/cidia19/jupyter/env-cnn/lib/python3.7/site-packages/tensorflow/python/eager/execute.py in quick_execute(op_name, num_outputs, inputs, attrs, ctx, name)
-     58     ctx.ensure_initialized()
-     59     tensors = pywrap_tfe.TFE_Py_Execute(ctx._handle, device_name, op_name,
----> 60                                         inputs, attrs, num_outputs)
-     61   except core._NotOkStatusException as e:
-     62     if name is not None:
-
-ResourceExhaustedError:  OOM when allocating tensor with shape[16,2048,10,10] and type float on /job:localhost/replica:0/task:0/device:GPU:0 by allocator GPU_0_bfc
-	 [[node sequential_19/resnet50/conv5_block3_add/add (defined at <ipython-input-12-25ea89fdad1b>:74) ]]
-Hint: If you want to see a list of allocated tensors when OOM happens, add report_tensor_allocations_upon_oom to RunOptions for current allocation info.
- [Op:__inference_train_function_935045]
-
-Function call stack:
-train_function
-
-
-Check models!
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.iter
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.decay
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.learning_rate
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.momentum
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.rho
+WARNING:tensorflow:A checkpoint was restored (e.g. tf.train.Checkpoint.restore or tf.keras.Model.load_weights) but not all checkpointed values were used. See above for specific issues. Use expect_partial() on the load status object, e.g. tf.train.Checkpoint.restore(...).expect_partial(), to silence these warnings, or use assert_consumed() to make the check explicit. See https://www.tensorflow.org/guide/checkpoint#loading_mechanics for details.
+584/584 [==============================] - 382s 653ms/step - loss: 0.0572 - accuracy: 0.9775 - val_loss: 1.1209 - val_accuracy: 0.3139
+Epoch 2/20
+584/584 [==============================] - 400s 684ms/step - loss: 0.0034 - accuracy: 0.9984 - val_loss: 1.5962 - val_accuracy: 0.6233
+Epoch 3/20
+584/584 [==============================] - 402s 688ms/step - loss: 0.0018 - accuracy: 0.9995 - val_loss: 0.1099 - val_accuracy: 0.9686
+Epoch 4/20
+584/584 [==============================] - 402s 689ms/step - loss: 0.0050 - accuracy: 0.9992 - val_loss: 0.1540 - val_accuracy: 0.9616
+Epoch 5/20
+584/584 [==============================] - 402s 689ms/step - loss: 0.0024 - accuracy: 0.9995 - val_loss: 0.4368 - val_accuracy: 0.9169
+Epoch 6/20
+584/584 [==============================] - 402s 689ms/step - loss: 9.1866e-04 - accuracy: 0.9998 - val_loss: 0.1775 - val_accuracy: 0.9584
+Epoch 7/20
+584/584 [==============================] - 402s 688ms/step - loss: 2.0372e-04 - accuracy: 0.9999 - val_loss: 0.2171 - val_accuracy: 0.9459
+Epoch 8/20
+584/584 [==============================] - 402s 689ms/step - loss: 7.7123e-04 - accuracy: 0.9999 - val_loss: 0.0986 - val_accuracy: 0.9777
+Epoch 9/20
+584/584 [==============================] - 402s 689ms/step - loss: 8.1534e-06 - accuracy: 1.0000 - val_loss: 0.0949 - val_accuracy: 0.9759
+Epoch 10/20
+584/584 [==============================] - 406s 696ms/step - loss: 7.4602e-04 - accuracy: 0.9998 - val_loss: 0.3504 - val_accuracy: 0.9515
+Epoch 11/20
+584/584 [==============================] - 403s 691ms/step - loss: 2.5301e-07 - accuracy: 1.0000 - val_loss: 0.2677 - val_accuracy: 0.9550
+Epoch 12/20
+584/584 [==============================] - 407s 696ms/step - loss: 1.0338e-07 - accuracy: 1.0000 - val_loss: 0.3000 - val_accuracy: 0.9511
+Epoch 13/20
+584/584 [==============================] - 405s 693ms/step - loss: 5.8891e-05 - accuracy: 1.0000 - val_loss: 0.0842 - val_accuracy: 0.9836
+Epoch 14/20
+584/584 [==============================] - 406s 696ms/step - loss: 3.1834e-04 - accuracy: 0.9998 - val_loss: 0.1605 - val_accuracy: 0.9703
+Epoch 15/20
+584/584 [==============================] - 406s 696ms/step - loss: 8.5875e-09 - accuracy: 1.0000 - val_loss: 0.2417 - val_accuracy: 0.9647
+Epoch 16/20
+584/584 [==============================] - 406s 696ms/step - loss: 3.4495e-08 - accuracy: 1.0000 - val_loss: 0.2303 - val_accuracy: 0.9665
+Epoch 17/20
+584/584 [==============================] - 405s 693ms/step - loss: 1.8281e-04 - accuracy: 0.9999 - val_loss: 0.1004 - val_accuracy: 0.9791
+Epoch 18/20
+584/584 [==============================] - 406s 696ms/step - loss: 7.8383e-05 - accuracy: 1.0000 - val_loss: 0.3398 - val_accuracy: 0.9480
+Epoch 19/20
+584/584 [==============================] - 407s 697ms/step - loss: 3.6999e-05 - accuracy: 1.0000 - val_loss: 0.5086 - val_accuracy: 0.9361
+Epoch 20/20
+584/584 [==============================] - 406s 695ms/step - loss: 7.8798e-08 - accuracy: 1.0000 - val_loss: 0.2729 - val_accuracy: 0.9567
+{'NEGATIVE': 0, 'POSITIVE': 1}
 
