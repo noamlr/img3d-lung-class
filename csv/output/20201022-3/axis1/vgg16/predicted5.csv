@@ -1,0 +1,57 @@
+fold,patient,real,predicted,count
+5,C21,covid,non covid,20
+5,C26,covid,non covid,20
+5,C27,covid,non covid,20
+5,C44,covid,non covid,20
+5,C49,covid,non covid,20
+5,C19,covid,non covid,20
+5,C51,covid,non covid,20
+5,C71,covid,non covid,20
+5,C83,covid,non covid,20
+5,C88,covid,non covid,20
+5,C94,covid,non covid,20
+5,C96,covid,non covid,20
+5,C115,covid,non covid,20
+5,C121,covid,non covid,20
+5,C130,covid,non covid,20
+5,C132,covid,non covid,20
+5,C135,covid,non covid,20
+5,C149,covid,non covid,20
+5,TYP-021,covid,non covid,20
+5,TYP-013,covid,non covid,20
+5,TYP-016,covid,non covid,20
+5,TYP-011,covid,non covid,20
+5,TYP-003,covid,non covid,20
+5,C30,non covid,non covid,20
+5,C31,non covid,non covid,20
+5,C34,non covid,non covid,20
+5,C37,non covid,non covid,20
+5,C38,non covid,non covid,20
+5,C46,non covid,non covid,20
+5,C47,non covid,non covid,20
+5,C61,non covid,non covid,20
+5,C65,non covid,non covid,20
+5,C67,non covid,non covid,20
+5,C73,non covid,non covid,20
+5,C76,non covid,non covid,20
+5,C9,non covid,non covid,20
+5,C97,non covid,non covid,20
+5,C100,non covid,non covid,20
+5,C129,non covid,non covid,20
+5,C8,non covid,non covid,20
+5,C159,non covid,non covid,20
+5,C164,non covid,non covid,20
+5,NEG-012,non covid,non covid,20
+5,NEG-014,non covid,non covid,20
+5,NEG-002,non covid,non covid,20
+5,IND-021,non covid,non covid,20
+5,IND-013,non covid,non covid,20
+5,IND-004,non covid,non covid,20
+5,IND-017,non covid,non covid,20
+5,IND-012,non covid,non covid,20
+5,IND-003,non covid,non covid,20
+5,ATY-009,non covid,non covid,20
+5,ATY-013,non covid,non covid,20
+5,ATY-016,non covid,non covid,20
+5,ATY-019,non covid,non covid,20
+5,ATY-014,non covid,non covid,20

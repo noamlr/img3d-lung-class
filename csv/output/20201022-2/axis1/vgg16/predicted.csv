@@ -1,0 +1,110 @@
+fold,patient,real,predicted,count
+4,C25,covid,covid,40
+4,C41,covid,covid,37
+4,C69,covid,covid,40
+4,C77,covid,covid,40
+4,C11,covid,covid,24
+4,C85,covid,covid,40
+4,C13,covid,covid,40
+4,C103,covid,covid,40
+4,C111,covid,covid,40
+4,C116,covid,non covid,40
+4,C138,covid,covid,40
+4,C142,covid,covid,40
+4,C145,covid,covid,35
+4,C151,covid,non covid,25
+4,C162,covid,non covid,22
+4,TYP-024,covid,covid,29
+4,TYP-006,covid,covid,40
+4,TYP-015,covid,covid,40
+4,TYP-012,covid,covid,40
+4,TYP-008,covid,non covid,33
+4,TYP-027,covid,covid,25
+4,C29,non covid,non covid,40
+4,C43,non covid,non covid,40
+4,C45,non covid,covid,37
+4,C48,non covid,covid,40
+4,C52,non covid,non covid,40
+4,C54,non covid,covid,30
+4,C56,non covid,non covid,35
+4,C68,non covid,non covid,40
+4,C87,non covid,non covid,40
+4,C102,non covid,non covid,40
+4,C128,non covid,non covid,35
+4,C141,non covid,non covid,40
+4,C152,non covid,non covid,36
+4,C156,non covid,non covid,31
+4,NEG-013,non covid,non covid,40
+4,IND-020,non covid,non covid,40
+4,IND-025,non covid,covid,20
+4,IND-025,,non covid,20
+4,IND-024,non covid,non covid,40
+4,IND-006,non covid,non covid,30
+4,IND-005,non covid,covid,24
+4,IND-001,non covid,non covid,40
+4,IND-019,non covid,non covid,40
+4,IND-011,non covid,non covid,40
+4,IND-014,non covid,non covid,22
+4,ATY-026,non covid,covid,40
+4,ATY-021,non covid,non covid,26
+4,ATY-006,non covid,non covid,40
+4,ATY-029,non covid,non covid,40
+4,ATY-002,non covid,non covid,40
+4,ATY-027,non covid,non covid,40
+5,C21,covid,covid,39
+5,C26,covid,covid,35
+5,C27,covid,covid,40
+5,C44,covid,non covid,21
+5,C49,covid,covid,40
+5,C19,covid,covid,40
+5,C51,covid,covid,40
+5,C71,covid,covid,40
+5,C83,covid,covid,40
+5,C88,covid,covid,37
+5,C94,covid,covid,21
+5,C96,covid,covid,40
+5,C115,covid,non covid,40
+5,C121,covid,covid,40
+5,C130,covid,covid,40
+5,C132,covid,covid,40
+5,C135,covid,covid,40
+5,C149,covid,covid,20
+5,C149,,non covid,20
+5,TYP-021,covid,non covid,40
+5,TYP-013,covid,covid,40
+5,TYP-016,covid,covid,36
+5,TYP-011,covid,covid,40
+5,TYP-003,covid,covid,39
+5,C30,non covid,non covid,40
+5,C31,non covid,covid,39
+5,C34,non covid,non covid,40
+5,C37,non covid,non covid,35
+5,C38,non covid,non covid,37
+5,C46,non covid,non covid,40
+5,C47,non covid,non covid,40
+5,C61,non covid,non covid,40
+5,C65,non covid,non covid,40
+5,C67,non covid,non covid,40
+5,C73,non covid,non covid,40
+5,C76,non covid,non covid,40
+5,C9,non covid,non covid,40
+5,C97,non covid,non covid,40
+5,C100,non covid,non covid,40
+5,C129,non covid,non covid,36
+5,C8,non covid,non covid,40
+5,C159,non covid,non covid,40
+5,C164,non covid,non covid,27
+5,NEG-012,non covid,non covid,40
+5,NEG-014,non covid,non covid,40
+5,NEG-002,non covid,non covid,40
+5,IND-021,non covid,non covid,40
+5,IND-013,non covid,non covid,40
+5,IND-004,non covid,non covid,40
+5,IND-017,non covid,non covid,40
+5,IND-012,non covid,non covid,40
+5,IND-003,non covid,non covid,40
+5,ATY-009,non covid,non covid,40
+5,ATY-013,non covid,non covid,40
+5,ATY-016,non covid,non covid,30
+5,ATY-019,non covid,non covid,28
+5,ATY-014,non covid,non covid,40
