@@ -1,0 +1,11 @@
+fold,patient,real,predicted,count
+1,N181,non covid,non covid,164
+1,N258,non covid,covid,73
+2,N181,non covid,non covid,164
+2,N258,non covid,covid,82
+3,N181,non covid,non covid,164
+3,N258,non covid,covid,44
+4,N181,non covid,non covid,164
+4,N258,non covid,non covid,56
+5,N181,non covid,non covid,141
+5,N258,non covid,covid,78

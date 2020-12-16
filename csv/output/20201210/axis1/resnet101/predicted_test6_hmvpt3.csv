@@ -1,0 +1,617 @@
+fold,patient,real,predicted,count
+1,N163,non covid,non covid,82
+1,N164,non covid,non covid,82
+1,N166,non covid,non covid,82
+1,N168,non covid,non covid,82
+1,N169,non covid,non covid,82
+1,N174,non covid,non covid,82
+1,N177,non covid,non covid,82
+1,N180,non covid,non covid,82
+1,N185,non covid,non covid,82
+1,N186,non covid,non covid,82
+1,N188,non covid,non covid,82
+1,N191,non covid,non covid,82
+1,N192,non covid,non covid,82
+1,N193,non covid,non covid,82
+1,N195,non covid,non covid,82
+1,N197,non covid,non covid,82
+1,N206,non covid,non covid,82
+1,N207,non covid,non covid,82
+1,N210,non covid,non covid,82
+1,N212,non covid,non covid,82
+1,N214,non covid,non covid,82
+1,N216,non covid,non covid,82
+1,N221,non covid,non covid,82
+1,N222,non covid,non covid,82
+1,N223,non covid,non covid,82
+1,N226,non covid,non covid,82
+1,N227,non covid,non covid,79
+1,N228,non covid,non covid,82
+1,N229,non covid,non covid,82
+1,N231,non covid,non covid,82
+1,N232,non covid,non covid,82
+1,N235,non covid,non covid,82
+1,N236,non covid,non covid,82
+1,N239,non covid,non covid,82
+1,N243,non covid,non covid,82
+1,N245,non covid,non covid,82
+1,N252,non covid,non covid,82
+1,N253,non covid,non covid,82
+1,N255,non covid,non covid,82
+1,N257,non covid,non covid,82
+1,N260,non covid,non covid,82
+1,N263,non covid,non covid,82
+1,N264,non covid,non covid,82
+1,N265,non covid,non covid,82
+1,N274,non covid,non covid,82
+1,N276,non covid,non covid,82
+1,N278,non covid,non covid,82
+1,N279,non covid,non covid,82
+1,N282,non covid,non covid,82
+1,N283,non covid,non covid,82
+1,N284,non covid,non covid,82
+1,N288,non covid,non covid,82
+1,N289,non covid,non covid,82
+1,N290,non covid,non covid,82
+1,N291,non covid,non covid,82
+1,N295,non covid,non covid,82
+1,N296,non covid,non covid,82
+1,N297,non covid,non covid,82
+1,N299,non covid,non covid,82
+1,N160,covid,non covid,77
+1,N167,covid,covid,82
+1,N170,covid,covid,82
+1,N190,covid,covid,82
+1,N201,covid,covid,48
+1,N203,covid,covid,82
+1,N213,covid,covid,80
+1,N230,covid,non covid,73
+1,N238,covid,covid,82
+1,N266,covid,non covid,82
+1,N285,covid,covid,82
+1,N286,covid,non covid,73
+1,N300,covid,non covid,45
+1,N161,non covid,non covid,82
+1,N171,non covid,non covid,82
+1,N172,non covid,non covid,81
+1,N173,non covid,non covid,82
+1,N176,non covid,covid,53
+1,N178,non covid,non covid,76
+1,N182,non covid,non covid,82
+1,N184,non covid,non covid,82
+1,N189,non covid,non covid,82
+1,N194,non covid,non covid,82
+1,N196,non covid,covid,52
+1,N200,non covid,non covid,82
+1,N202,non covid,non covid,82
+1,N204,non covid,covid,82
+1,N205,non covid,non covid,82
+1,N208,non covid,non covid,82
+1,N220,non covid,non covid,82
+1,N234,non covid,non covid,82
+1,N237,non covid,non covid,82
+1,N240,non covid,non covid,82
+1,N242,non covid,non covid,82
+1,N246,non covid,covid,50
+1,N247,non covid,non covid,81
+1,N249,non covid,covid,50
+1,N251,non covid,non covid,82
+1,N254,non covid,non covid,82
+1,N256,non covid,non covid,82
+1,N259,non covid,non covid,82
+1,N261,non covid,non covid,82
+1,N267,non covid,non covid,80
+1,N269,non covid,covid,44
+1,N272,non covid,non covid,63
+1,N273,non covid,non covid,82
+1,N275,non covid,non covid,82
+1,N281,non covid,non covid,75
+1,N293,non covid,non covid,82
+1,N294,non covid,non covid,82
+1,N165,non covid,non covid,82
+1,N175,non covid,non covid,82
+1,N183,non covid,non covid,82
+1,N187,non covid,non covid,82
+1,N198,non covid,non covid,82
+1,N209,non covid,non covid,82
+1,N219,non covid,non covid,82
+1,N233,non covid,non covid,81
+1,N241,non covid,non covid,82
+1,N244,non covid,non covid,82
+1,N248,non covid,non covid,82
+1,N270,non covid,non covid,80
+1,N271,non covid,non covid,82
+1,N280,non covid,non covid,82
+2,N163,non covid,non covid,82
+2,N164,non covid,non covid,82
+2,N166,non covid,non covid,82
+2,N168,non covid,non covid,82
+2,N169,non covid,non covid,82
+2,N174,non covid,non covid,82
+2,N177,non covid,non covid,82
+2,N180,non covid,non covid,82
+2,N185,non covid,non covid,82
+2,N186,non covid,non covid,82
+2,N188,non covid,non covid,82
+2,N191,non covid,non covid,82
+2,N192,non covid,non covid,82
+2,N193,non covid,non covid,82
+2,N195,non covid,non covid,82
+2,N197,non covid,non covid,82
+2,N206,non covid,non covid,82
+2,N207,non covid,non covid,82
+2,N210,non covid,non covid,82
+2,N212,non covid,non covid,82
+2,N214,non covid,non covid,82
+2,N216,non covid,non covid,82
+2,N221,non covid,non covid,82
+2,N222,non covid,non covid,82
+2,N223,non covid,non covid,82
+2,N226,non covid,non covid,82
+2,N227,non covid,non covid,81
+2,N228,non covid,non covid,82
+2,N229,non covid,non covid,82
+2,N231,non covid,non covid,82
+2,N232,non covid,non covid,82
+2,N235,non covid,non covid,82
+2,N236,non covid,non covid,82
+2,N239,non covid,non covid,82
+2,N243,non covid,non covid,82
+2,N245,non covid,non covid,82
+2,N252,non covid,non covid,82
+2,N253,non covid,non covid,82
+2,N255,non covid,non covid,82
+2,N257,non covid,non covid,82
+2,N260,non covid,non covid,82
+2,N263,non covid,non covid,82
+2,N264,non covid,non covid,82
+2,N265,non covid,non covid,82
+2,N274,non covid,non covid,82
+2,N276,non covid,non covid,82
+2,N278,non covid,non covid,82
+2,N279,non covid,non covid,82
+2,N282,non covid,non covid,82
+2,N283,non covid,non covid,82
+2,N284,non covid,non covid,82
+2,N288,non covid,non covid,82
+2,N289,non covid,non covid,82
+2,N290,non covid,non covid,82
+2,N291,non covid,non covid,82
+2,N295,non covid,non covid,82
+2,N296,non covid,non covid,82
+2,N297,non covid,non covid,82
+2,N299,non covid,non covid,82
+2,N160,covid,non covid,52
+2,N167,covid,covid,82
+2,N170,covid,covid,82
+2,N190,covid,covid,82
+2,N201,covid,covid,70
+2,N203,covid,covid,82
+2,N213,covid,covid,82
+2,N230,covid,non covid,75
+2,N238,covid,covid,81
+2,N266,covid,non covid,72
+2,N285,covid,covid,82
+2,N286,covid,covid,44
+2,N300,covid,covid,74
+2,N161,non covid,non covid,77
+2,N171,non covid,non covid,82
+2,N172,non covid,covid,41
+2,N172,,non covid,41
+2,N173,non covid,non covid,82
+2,N176,non covid,covid,53
+2,N178,non covid,non covid,67
+2,N182,non covid,non covid,82
+2,N184,non covid,non covid,82
+2,N189,non covid,non covid,82
+2,N194,non covid,non covid,82
+2,N196,non covid,covid,43
+2,N200,non covid,non covid,82
+2,N202,non covid,non covid,82
+2,N204,non covid,covid,82
+2,N205,non covid,non covid,82
+2,N208,non covid,non covid,82
+2,N220,non covid,non covid,82
+2,N234,non covid,non covid,82
+2,N237,non covid,non covid,82
+2,N240,non covid,non covid,82
+2,N242,non covid,non covid,82
+2,N246,non covid,covid,52
+2,N247,non covid,covid,63
+2,N249,non covid,non covid,45
+2,N251,non covid,non covid,82
+2,N254,non covid,non covid,82
+2,N256,non covid,non covid,82
+2,N259,non covid,non covid,82
+2,N261,non covid,non covid,82
+2,N267,non covid,non covid,82
+2,N269,non covid,non covid,71
+2,N272,non covid,non covid,82
+2,N273,non covid,non covid,82
+2,N275,non covid,non covid,68
+2,N281,non covid,non covid,74
+2,N293,non covid,non covid,82
+2,N294,non covid,non covid,82
+2,N165,non covid,non covid,82
+2,N175,non covid,non covid,82
+2,N183,non covid,non covid,82
+2,N187,non covid,non covid,82
+2,N198,non covid,non covid,82
+2,N209,non covid,non covid,82
+2,N219,non covid,non covid,82
+2,N233,non covid,non covid,57
+2,N241,non covid,non covid,82
+2,N244,non covid,non covid,82
+2,N248,non covid,non covid,82
+2,N270,non covid,non covid,79
+2,N271,non covid,non covid,82
+2,N280,non covid,non covid,82
+3,N163,non covid,non covid,82
+3,N164,non covid,non covid,82
+3,N166,non covid,non covid,82
+3,N168,non covid,non covid,82
+3,N169,non covid,non covid,82
+3,N174,non covid,non covid,82
+3,N177,non covid,non covid,82
+3,N180,non covid,non covid,82
+3,N185,non covid,non covid,82
+3,N186,non covid,non covid,82
+3,N188,non covid,non covid,82
+3,N191,non covid,non covid,82
+3,N192,non covid,non covid,82
+3,N193,non covid,non covid,82
+3,N195,non covid,non covid,82
+3,N197,non covid,non covid,82
+3,N206,non covid,non covid,82
+3,N207,non covid,non covid,82
+3,N210,non covid,non covid,82
+3,N212,non covid,non covid,82
+3,N214,non covid,non covid,81
+3,N216,non covid,non covid,82
+3,N221,non covid,non covid,82
+3,N222,non covid,non covid,82
+3,N223,non covid,non covid,82
+3,N226,non covid,non covid,82
+3,N227,non covid,non covid,82
+3,N228,non covid,non covid,80
+3,N229,non covid,non covid,82
+3,N231,non covid,non covid,82
+3,N232,non covid,non covid,82
+3,N235,non covid,non covid,82
+3,N236,non covid,non covid,82
+3,N239,non covid,non covid,82
+3,N243,non covid,non covid,82
+3,N245,non covid,non covid,82
+3,N252,non covid,non covid,82
+3,N253,non covid,non covid,82
+3,N255,non covid,non covid,82
+3,N257,non covid,non covid,82
+3,N260,non covid,non covid,82
+3,N263,non covid,non covid,82
+3,N264,non covid,non covid,82
+3,N265,non covid,non covid,82
+3,N274,non covid,non covid,82
+3,N276,non covid,non covid,82
+3,N278,non covid,non covid,82
+3,N279,non covid,non covid,82
+3,N282,non covid,non covid,81
+3,N283,non covid,non covid,82
+3,N284,non covid,non covid,82
+3,N288,non covid,non covid,82
+3,N289,non covid,non covid,82
+3,N290,non covid,non covid,82
+3,N291,non covid,non covid,82
+3,N295,non covid,non covid,82
+3,N296,non covid,non covid,82
+3,N297,non covid,non covid,82
+3,N299,non covid,non covid,82
+3,N160,covid,non covid,71
+3,N167,covid,covid,82
+3,N170,covid,covid,81
+3,N190,covid,covid,82
+3,N201,covid,covid,82
+3,N203,covid,covid,82
+3,N213,covid,covid,82
+3,N230,covid,non covid,82
+3,N238,covid,covid,82
+3,N266,covid,non covid,78
+3,N285,covid,covid,82
+3,N286,covid,covid,47
+3,N300,covid,non covid,68
+3,N161,non covid,covid,42
+3,N171,non covid,non covid,82
+3,N172,non covid,non covid,54
+3,N173,non covid,non covid,82
+3,N176,non covid,covid,61
+3,N178,non covid,non covid,82
+3,N182,non covid,non covid,82
+3,N184,non covid,covid,67
+3,N189,non covid,non covid,82
+3,N194,non covid,non covid,82
+3,N196,non covid,covid,54
+3,N200,non covid,non covid,82
+3,N202,non covid,non covid,82
+3,N204,non covid,covid,82
+3,N205,non covid,non covid,79
+3,N208,non covid,non covid,82
+3,N220,non covid,non covid,82
+3,N234,non covid,non covid,82
+3,N237,non covid,non covid,82
+3,N240,non covid,non covid,82
+3,N242,non covid,non covid,79
+3,N246,non covid,covid,81
+3,N247,non covid,non covid,82
+3,N249,non covid,non covid,82
+3,N251,non covid,non covid,82
+3,N254,non covid,non covid,75
+3,N256,non covid,non covid,82
+3,N259,non covid,non covid,82
+3,N261,non covid,non covid,82
+3,N267,non covid,covid,65
+3,N269,non covid,non covid,66
+3,N272,non covid,covid,43
+3,N273,non covid,non covid,82
+3,N275,non covid,non covid,82
+3,N281,non covid,non covid,63
+3,N293,non covid,non covid,82
+3,N294,non covid,non covid,82
+3,N165,non covid,non covid,82
+3,N175,non covid,non covid,82
+3,N183,non covid,non covid,82
+3,N187,non covid,non covid,82
+3,N198,non covid,non covid,82
+3,N209,non covid,non covid,79
+3,N219,non covid,non covid,82
+3,N233,non covid,covid,49
+3,N241,non covid,non covid,82
+3,N244,non covid,non covid,82
+3,N248,non covid,non covid,82
+3,N270,non covid,non covid,82
+3,N271,non covid,non covid,82
+3,N280,non covid,non covid,82
+4,N163,non covid,non covid,82
+4,N164,non covid,non covid,82
+4,N166,non covid,non covid,82
+4,N168,non covid,non covid,82
+4,N169,non covid,non covid,82
+4,N174,non covid,non covid,82
+4,N177,non covid,non covid,82
+4,N180,non covid,non covid,82
+4,N185,non covid,non covid,82
+4,N186,non covid,non covid,82
+4,N188,non covid,non covid,82
+4,N191,non covid,non covid,82
+4,N192,non covid,non covid,82
+4,N193,non covid,non covid,82
+4,N195,non covid,non covid,82
+4,N197,non covid,non covid,82
+4,N206,non covid,non covid,82
+4,N207,non covid,non covid,82
+4,N210,non covid,non covid,82
+4,N212,non covid,non covid,82
+4,N214,non covid,non covid,82
+4,N216,non covid,non covid,82
+4,N221,non covid,non covid,82
+4,N222,non covid,non covid,82
+4,N223,non covid,non covid,82
+4,N226,non covid,non covid,82
+4,N227,non covid,non covid,82
+4,N228,non covid,non covid,82
+4,N229,non covid,non covid,82
+4,N231,non covid,non covid,82
+4,N232,non covid,non covid,82
+4,N235,non covid,non covid,82
+4,N236,non covid,non covid,82
+4,N239,non covid,non covid,82
+4,N243,non covid,non covid,82
+4,N245,non covid,non covid,82
+4,N252,non covid,non covid,82
+4,N253,non covid,non covid,82
+4,N255,non covid,non covid,82
+4,N257,non covid,non covid,82
+4,N260,non covid,non covid,82
+4,N263,non covid,non covid,82
+4,N264,non covid,non covid,82
+4,N265,non covid,non covid,82
+4,N274,non covid,non covid,82
+4,N276,non covid,non covid,82
+4,N278,non covid,non covid,82
+4,N279,non covid,non covid,82
+4,N282,non covid,non covid,82
+4,N283,non covid,non covid,82
+4,N284,non covid,non covid,82
+4,N288,non covid,non covid,82
+4,N289,non covid,non covid,82
+4,N290,non covid,non covid,82
+4,N291,non covid,non covid,82
+4,N295,non covid,non covid,82
+4,N296,non covid,non covid,82
+4,N297,non covid,non covid,82
+4,N299,non covid,non covid,82
+4,N160,covid,non covid,73
+4,N167,covid,covid,82
+4,N170,covid,covid,82
+4,N190,covid,covid,82
+4,N201,covid,covid,80
+4,N203,covid,covid,82
+4,N213,covid,covid,82
+4,N230,covid,non covid,80
+4,N238,covid,covid,82
+4,N266,covid,non covid,68
+4,N285,covid,covid,82
+4,N286,covid,covid,63
+4,N300,covid,covid,50
+4,N161,non covid,non covid,78
+4,N171,non covid,non covid,82
+4,N172,non covid,covid,50
+4,N173,non covid,non covid,82
+4,N176,non covid,covid,65
+4,N178,non covid,non covid,82
+4,N182,non covid,non covid,82
+4,N184,non covid,non covid,82
+4,N189,non covid,non covid,82
+4,N194,non covid,non covid,82
+4,N196,non covid,covid,66
+4,N200,non covid,non covid,82
+4,N202,non covid,non covid,82
+4,N204,non covid,covid,82
+4,N205,non covid,non covid,82
+4,N208,non covid,non covid,81
+4,N220,non covid,non covid,82
+4,N234,non covid,non covid,82
+4,N237,non covid,non covid,82
+4,N240,non covid,non covid,82
+4,N242,non covid,non covid,82
+4,N246,non covid,covid,82
+4,N247,non covid,non covid,63
+4,N249,non covid,non covid,82
+4,N251,non covid,non covid,82
+4,N254,non covid,non covid,82
+4,N256,non covid,non covid,82
+4,N259,non covid,non covid,82
+4,N261,non covid,non covid,82
+4,N267,non covid,non covid,79
+4,N269,non covid,non covid,44
+4,N272,non covid,covid,72
+4,N273,non covid,non covid,82
+4,N275,non covid,non covid,82
+4,N281,non covid,non covid,73
+4,N293,non covid,non covid,82
+4,N294,non covid,non covid,82
+4,N165,non covid,non covid,82
+4,N175,non covid,non covid,82
+4,N183,non covid,non covid,82
+4,N187,non covid,non covid,82
+4,N198,non covid,non covid,82
+4,N209,non covid,non covid,82
+4,N219,non covid,non covid,82
+4,N233,non covid,non covid,72
+4,N241,non covid,non covid,82
+4,N244,non covid,non covid,82
+4,N248,non covid,non covid,82
+4,N270,non covid,covid,52
+4,N271,non covid,non covid,82
+4,N280,non covid,non covid,82
+5,N163,non covid,non covid,82
+5,N164,non covid,non covid,82
+5,N166,non covid,non covid,82
+5,N168,non covid,non covid,82
+5,N169,non covid,non covid,82
+5,N174,non covid,non covid,82
+5,N177,non covid,non covid,82
+5,N180,non covid,non covid,82
+5,N185,non covid,non covid,82
+5,N186,non covid,non covid,82
+5,N188,non covid,non covid,82
+5,N191,non covid,non covid,82
+5,N192,non covid,non covid,82
+5,N193,non covid,non covid,82
+5,N195,non covid,non covid,82
+5,N197,non covid,non covid,82
+5,N206,non covid,non covid,82
+5,N207,non covid,non covid,82
+5,N210,non covid,non covid,82
+5,N212,non covid,non covid,82
+5,N214,non covid,non covid,82
+5,N216,non covid,non covid,82
+5,N221,non covid,non covid,82
+5,N222,non covid,non covid,82
+5,N223,non covid,non covid,82
+5,N226,non covid,non covid,82
+5,N227,non covid,non covid,79
+5,N228,non covid,non covid,82
+5,N229,non covid,non covid,82
+5,N231,non covid,non covid,82
+5,N232,non covid,non covid,82
+5,N235,non covid,non covid,82
+5,N236,non covid,non covid,82
+5,N239,non covid,non covid,82
+5,N243,non covid,non covid,82
+5,N245,non covid,non covid,82
+5,N252,non covid,non covid,82
+5,N253,non covid,non covid,82
+5,N255,non covid,non covid,82
+5,N257,non covid,non covid,82
+5,N260,non covid,non covid,82
+5,N263,non covid,non covid,82
+5,N264,non covid,non covid,82
+5,N265,non covid,non covid,82
+5,N274,non covid,non covid,82
+5,N276,non covid,non covid,82
+5,N278,non covid,non covid,82
+5,N279,non covid,non covid,82
+5,N282,non covid,non covid,82
+5,N283,non covid,non covid,82
+5,N284,non covid,non covid,82
+5,N288,non covid,non covid,82
+5,N289,non covid,non covid,82
+5,N290,non covid,non covid,82
+5,N291,non covid,non covid,82
+5,N295,non covid,non covid,82
+5,N296,non covid,non covid,82
+5,N297,non covid,non covid,82
+5,N299,non covid,non covid,82
+5,N160,covid,non covid,74
+5,N167,covid,covid,82
+5,N170,covid,covid,82
+5,N190,covid,covid,82
+5,N201,covid,covid,82
+5,N203,covid,covid,82
+5,N213,covid,covid,82
+5,N230,covid,non covid,81
+5,N238,covid,covid,80
+5,N266,covid,non covid,82
+5,N285,covid,covid,82
+5,N286,covid,non covid,54
+5,N300,covid,covid,69
+5,N161,non covid,non covid,79
+5,N171,non covid,non covid,82
+5,N172,non covid,non covid,82
+5,N173,non covid,non covid,82
+5,N176,non covid,non covid,77
+5,N178,non covid,non covid,74
+5,N182,non covid,non covid,82
+5,N184,non covid,non covid,82
+5,N189,non covid,non covid,82
+5,N194,non covid,non covid,82
+5,N196,non covid,non covid,76
+5,N200,non covid,non covid,79
+5,N202,non covid,non covid,82
+5,N204,non covid,covid,82
+5,N205,non covid,non covid,82
+5,N208,non covid,non covid,82
+5,N220,non covid,non covid,82
+5,N234,non covid,non covid,82
+5,N237,non covid,non covid,82
+5,N240,non covid,non covid,82
+5,N242,non covid,non covid,79
+5,N246,non covid,covid,77
+5,N247,non covid,covid,72
+5,N249,non covid,covid,82
+5,N251,non covid,non covid,82
+5,N254,non covid,non covid,82
+5,N256,non covid,non covid,82
+5,N259,non covid,non covid,82
+5,N261,non covid,non covid,82
+5,N267,non covid,non covid,76
+5,N269,non covid,non covid,76
+5,N272,non covid,non covid,80
+5,N273,non covid,non covid,82
+5,N275,non covid,non covid,80
+5,N281,non covid,non covid,82
+5,N293,non covid,non covid,82
+5,N294,non covid,non covid,82
+5,N165,non covid,non covid,82
+5,N175,non covid,non covid,82
+5,N183,non covid,non covid,82
+5,N187,non covid,non covid,82
+5,N198,non covid,non covid,82
+5,N209,non covid,non covid,72
+5,N219,non covid,non covid,82
+5,N233,non covid,non covid,55
+5,N241,non covid,non covid,82
+5,N244,non covid,non covid,82
+5,N248,non covid,non covid,82
+5,N270,non covid,non covid,57
+5,N271,non covid,non covid,82
+5,N280,non covid,non covid,80
