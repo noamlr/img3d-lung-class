@@ -1,0 +1,386 @@
+fold,patient,real,predicted,count
+1,C26,covid,covid,78
+1,C14,covid,covid,82
+1,C36,covid,covid,82
+1,C41,covid,covid,82
+1,C20,covid,covid,82
+1,C79,covid,covid,82
+1,C80,covid,covid,82
+1,C82,covid,non covid,53
+1,C85,covid,covid,82
+1,C94,covid,covid,77
+1,C101,covid,covid,80
+1,C103,covid,covid,82
+1,C114,covid,covid,76
+1,C149,covid,covid,82
+1,C154,covid,covid,82
+1,C155,covid,covid,82
+1,C161,covid,non covid,48
+1,TYP-026,covid,covid,81
+1,TYP-024,covid,covid,82
+1,TYP-018,covid,covid,82
+1,TYP-023,covid,covid,82
+1,TYP-008,covid,non covid,81
+1,C29,non covid,non covid,82
+1,C65,non covid,non covid,81
+1,C70,non covid,non covid,82
+1,C76,non covid,non covid,82
+1,C86,non covid,non covid,82
+1,C92,non covid,non covid,82
+1,C97,non covid,non covid,82
+1,C102,non covid,non covid,82
+1,C109,non covid,covid,82
+1,C123,non covid,non covid,48
+1,C129,non covid,non covid,79
+1,C139,non covid,non covid,82
+1,C147,non covid,non covid,82
+1,C8,non covid,non covid,82
+1,NEG-013,non covid,non covid,82
+1,NEG-004,non covid,non covid,82
+1,NEG-015,non covid,non covid,82
+1,IND-025,non covid,covid,82
+1,IND-021,non covid,non covid,82
+1,IND-024,non covid,non covid,82
+1,IND-006,non covid,non covid,74
+1,IND-030,non covid,non covid,82
+1,IND-017,non covid,non covid,57
+1,IND-010,non covid,non covid,82
+1,IND-015,non covid,covid,66
+1,IND-014,non covid,non covid,82
+1,IND-003,non covid,non covid,82
+1,ATY-020,non covid,non covid,82
+1,ATY-018,non covid,non covid,82
+1,ATY-001,non covid,non covid,82
+1,ATY-019,non covid,non covid,82
+1,N160,covid,non covid,66
+1,N165,non covid,non covid,82
+1,N174,non covid,non covid,82
+1,N176,non covid,non covid,80
+1,N177,non covid,non covid,82
+1,N182,non covid,non covid,82
+1,N183,non covid,non covid,82
+1,N209,non covid,non covid,82
+1,N212,non covid,non covid,82
+1,N219,non covid,non covid,82
+1,N223,non covid,non covid,81
+1,N230,covid,non covid,67
+1,N231,non covid,non covid,82
+1,N234,non covid,non covid,82
+1,N235,non covid,non covid,82
+1,N240,non covid,non covid,82
+1,N249,non covid,non covid,80
+1,N252,non covid,non covid,82
+1,N265,non covid,non covid,82
+1,N269,non covid,covid,50
+1,N270,non covid,non covid,81
+1,N272,non covid,non covid,82
+1,N288,non covid,non covid,82
+1,N295,non covid,non covid,82
+2,C25,covid,covid,79
+2,C32,covid,covid,56
+2,C12,covid,covid,82
+2,C77,covid,covid,164
+2,C11,covid,covid,82
+2,C83,covid,covid,82
+2,C90,covid,covid,82
+2,C96,covid,covid,82
+2,C110,covid,covid,42
+2,C112,covid,covid,82
+2,C117,covid,covid,82
+2,C16,covid,covid,82
+2,C132,covid,covid,82
+2,C142,covid,covid,82
+2,C145,covid,covid,82
+2,C151,covid,covid,82
+2,TYP-025,covid,covid,82
+2,TYP-005,covid,covid,80
+2,TYP-015,covid,covid,82
+2,TYP-012,covid,covid,82
+2,TYP-002,covid,covid,82
+2,TYP-003,covid,covid,82
+2,C24,non covid,non covid,82
+2,C28,non covid,non covid,82
+2,C34,non covid,non covid,82
+2,C43,non covid,non covid,82
+2,C45,non covid,non covid,82
+2,C47,non covid,non covid,82
+2,C54,non covid,non covid,82
+2,C63,non covid,non covid,82
+2,C73,non covid,non covid,82
+2,C89,non covid,non covid,82
+2,C99,non covid,non covid,67
+2,C100,non covid,non covid,82
+2,C5,non covid,non covid,82
+2,C106,non covid,non covid,82
+2,C118,non covid,non covid,82
+2,C127,non covid,non covid,82
+2,C137,non covid,non covid,82
+2,C156,non covid,covid,63
+2,C159,non covid,non covid,82
+2,C164,non covid,non covid,140
+2,NEG-009,non covid,non covid,82
+2,NEG-001,non covid,non covid,82
+2,NEG-012,non covid,non covid,82
+2,NEG-002,non covid,non covid,82
+2,IND-022,non covid,non covid,57
+2,IND-026,non covid,non covid,82
+2,IND-029,non covid,non covid,82
+2,IND-004,non covid,non covid,82
+2,IND-012,non covid,non covid,82
+2,IND-008,non covid,non covid,82
+2,ATY-022,non covid,non covid,81
+2,ATY-005,non covid,non covid,82
+2,ATY-030,non covid,non covid,71
+2,ATY-023,non covid,non covid,82
+2,N161,non covid,non covid,71
+2,N163,non covid,non covid,82
+2,N164,non covid,non covid,82
+2,N167,covid,covid,82
+2,N169,non covid,non covid,82
+2,N173,non covid,non covid,82
+2,N178,non covid,non covid,82
+2,N194,non covid,non covid,82
+2,N202,non covid,non covid,82
+2,N204,non covid,covid,82
+2,N221,non covid,non covid,82
+2,N226,non covid,non covid,82
+2,N238,covid,covid,58
+2,N239,non covid,non covid,82
+2,N248,non covid,non covid,82
+2,N258,non covid,covid,64
+2,N260,non covid,non covid,82
+2,N283,non covid,non covid,82
+2,N291,non covid,non covid,82
+2,N297,non covid,non covid,82
+2,N299,non covid,non covid,82
+3,C23,covid,covid,82
+3,C39,covid,covid,82
+3,C44,covid,covid,82
+3,C75,covid,covid,82
+3,C15,covid,covid,82
+3,C88,covid,covid,82
+3,C91,covid,covid,82
+3,C13,covid,covid,82
+3,C113,covid,covid,82
+3,C116,covid,non covid,73
+3,C136,covid,covid,82
+3,C138,covid,covid,82
+3,C157,covid,covid,82
+3,C162,covid,covid,82
+3,TYP-022,covid,covid,82
+3,TYP-006,covid,covid,82
+3,TYP-030,covid,non covid,80
+3,TYP-007,covid,covid,82
+3,TYP-011,covid,covid,81
+3,TYP-017,covid,covid,82
+3,TYP-014,covid,non covid,69
+3,TYP-027,covid,covid,82
+3,C37,non covid,non covid,82
+3,C38,non covid,non covid,82
+3,C48,non covid,covid,82
+3,C56,non covid,non covid,82
+3,C57,non covid,non covid,82
+3,C64,non covid,non covid,82
+3,C68,non covid,non covid,57
+3,C119,non covid,non covid,82
+3,C120,non covid,non covid,82
+3,C122,non covid,non covid,82
+3,C126,non covid,non covid,82
+3,C128,non covid,non covid,82
+3,C134,non covid,non covid,82
+3,C141,non covid,non covid,82
+3,C148,non covid,non covid,82
+3,C152,non covid,non covid,82
+3,NEG-006,non covid,non covid,82
+3,NEG-005,non covid,non covid,82
+3,NEG-010,non covid,non covid,82
+3,NEG-008,non covid,non covid,82
+3,IND-018,non covid,non covid,82
+3,IND-001,non covid,non covid,82
+3,IND-019,non covid,non covid,82
+3,IND-011,non covid,non covid,82
+3,ATY-025,non covid,non covid,76
+3,ATY-021,non covid,non covid,82
+3,ATY-013,non covid,non covid,82
+3,ATY-016,non covid,non covid,73
+3,ATY-014,non covid,non covid,82
+3,ATY-008,non covid,non covid,78
+3,ATY-027,non covid,non covid,82
+3,N171,non covid,non covid,82
+3,N172,non covid,non covid,82
+3,N180,non covid,non covid,82
+3,N184,non covid,non covid,79
+3,N187,non covid,non covid,82
+3,N188,non covid,non covid,82
+3,N189,non covid,non covid,82
+3,N190,covid,covid,82
+3,N193,non covid,non covid,82
+3,N197,non covid,non covid,82
+3,N198,non covid,non covid,82
+3,N201,covid,covid,68
+3,N207,non covid,non covid,82
+3,N216,non covid,non covid,82
+3,N220,non covid,non covid,82
+3,N229,non covid,non covid,82
+3,N241,non covid,non covid,82
+3,N253,non covid,non covid,82
+3,N264,non covid,non covid,82
+3,N271,non covid,non covid,82
+3,N278,non covid,non covid,82
+3,N284,non covid,non covid,82
+3,N294,non covid,non covid,82
+3,N296,non covid,non covid,82
+4,C21,covid,covid,82
+4,C27,covid,covid,82
+4,C49,covid,covid,82
+4,C60,covid,covid,82
+4,C71,covid,covid,82
+4,C74,covid,covid,82
+4,C111,covid,covid,82
+4,C115,covid,covid,82
+4,C121,covid,covid,82
+4,C124,covid,covid,82
+4,C125,covid,covid,82
+4,C131,covid,covid,82
+4,C143,covid,covid,82
+4,C144,covid,covid,82
+4,C158,covid,covid,82
+4,TYP-020,covid,covid,82
+4,TYP-028,covid,covid,64
+4,TYP-019,covid,covid,82
+4,TYP-004,covid,covid,82
+4,TYP-010,covid,covid,82
+4,C22,non covid,non covid,66
+4,C31,non covid,covid,45
+4,C42,non covid,non covid,82
+4,C52,non covid,non covid,82
+4,C55,non covid,non covid,66
+4,C59,non covid,non covid,78
+4,C61,non covid,non covid,82
+4,C62,non covid,non covid,82
+4,C67,non covid,non covid,82
+4,C72,non covid,covid,82
+4,C81,non covid,non covid,70
+4,C84,non covid,non covid,82
+4,C9,non covid,non covid,82
+4,C98,non covid,non covid,82
+4,C107,non covid,non covid,81
+4,C108,non covid,non covid,82
+4,C3,non covid,non covid,82
+4,NEG-011,non covid,non covid,82
+4,NEG-003,non covid,non covid,82
+4,IND-020,non covid,non covid,82
+4,IND-009,non covid,covid,82
+4,IND-013,non covid,non covid,82
+4,IND-016,non covid,non covid,59
+4,IND-023,non covid,non covid,82
+4,IND-027,non covid,covid,82
+4,ATY-026,non covid,covid,82
+4,ATY-009,non covid,non covid,82
+4,ATY-024,non covid,non covid,53
+4,ATY-028,non covid,non covid,82
+4,ATY-029,non covid,non covid,82
+4,ATY-012,non covid,non covid,80
+4,ATY-002,non covid,non covid,81
+4,N166,non covid,non covid,82
+4,N168,non covid,non covid,82
+4,N170,covid,covid,82
+4,N181,non covid,non covid,132
+4,N186,non covid,non covid,82
+4,N195,non covid,non covid,82
+4,N200,non covid,covid,81
+4,N203,covid,covid,82
+4,N232,non covid,non covid,82
+4,N233,non covid,non covid,80
+4,N236,non covid,non covid,82
+4,N242,non covid,non covid,62
+4,N243,non covid,non covid,82
+4,N245,non covid,non covid,82
+4,N251,non covid,non covid,82
+4,N255,non covid,non covid,82
+4,N259,non covid,non covid,82
+4,N267,non covid,covid,45
+4,N274,non covid,non covid,82
+4,N275,non covid,covid,71
+4,N276,non covid,non covid,82
+4,N279,non covid,non covid,82
+4,N280,non covid,non covid,82
+4,N285,covid,covid,82
+4,N286,covid,covid,82
+5,C33,covid,covid,82
+5,C35,covid,covid,82
+5,C18,covid,covid,82
+5,C19,covid,covid,82
+5,C51,covid,covid,82
+5,C69,covid,covid,82
+5,C93,covid,covid,82
+5,C130,covid,covid,164
+5,C17,covid,covid,82
+5,C133,covid,covid,82
+5,C135,covid,covid,82
+5,C146,covid,covid,82
+5,C150,covid,covid,82
+5,C160,covid,covid,80
+5,C163,covid,covid,82
+5,TYP-009,covid,covid,82
+5,TYP-021,covid,non covid,82
+5,TYP-013,covid,covid,82
+5,TYP-029,covid,covid,82
+5,TYP-016,covid,covid,82
+5,TYP-031,covid,covid,82
+5,C30,non covid,non covid,82
+5,C40,non covid,non covid,82
+5,C46,non covid,non covid,82
+5,C50,non covid,non covid,82
+5,C58,non covid,non covid,82
+5,C66,non covid,non covid,82
+5,C78,non covid,non covid,82
+5,C87,non covid,non covid,82
+5,C104,non covid,non covid,82
+5,C105,non covid,non covid,82
+5,C140,non covid,non covid,82
+5,NEG-007,non covid,non covid,82
+5,NEG-014,non covid,non covid,82
+5,IND-028,non covid,non covid,80
+5,IND-005,non covid,covid,82
+5,IND-007,non covid,non covid,82
+5,IND-002,non covid,non covid,53
+5,ATY-006,non covid,non covid,82
+5,ATY-007,non covid,non covid,82
+5,ATY-011,non covid,non covid,82
+5,ATY-004,non covid,non covid,82
+5,ATY-017,non covid,non covid,82
+5,ATY-010,non covid,non covid,82
+5,ATY-015,non covid,non covid,82
+5,ATY-003,non covid,non covid,82
+5,N175,non covid,non covid,82
+5,N185,non covid,non covid,82
+5,N191,non covid,non covid,82
+5,N192,non covid,non covid,82
+5,N196,non covid,non covid,71
+5,N205,non covid,non covid,82
+5,N206,non covid,non covid,82
+5,N208,non covid,non covid,81
+5,N210,non covid,non covid,82
+5,N213,covid,covid,82
+5,N214,non covid,non covid,82
+5,N222,non covid,non covid,82
+5,N227,non covid,non covid,82
+5,N228,non covid,non covid,82
+5,N237,non covid,non covid,82
+5,N244,non covid,non covid,82
+5,N246,non covid,non covid,57
+5,N247,non covid,non covid,65
+5,N254,non covid,non covid,82
+5,N256,non covid,non covid,82
+5,N257,non covid,non covid,82
+5,N261,non covid,non covid,80
+5,N263,non covid,non covid,82
+5,N266,covid,non covid,82
+5,N273,non covid,non covid,82
+5,N281,non covid,non covid,82
+5,N282,non covid,non covid,82
+5,N289,non covid,non covid,82
+5,N290,non covid,non covid,82
+5,N293,non covid,non covid,82
+5,N300,covid,non covid,59

@@ -3,3 +3,5 @@ images/*
 logs/*
 models/*
 training/*
+matrix.png
+metrics.png
