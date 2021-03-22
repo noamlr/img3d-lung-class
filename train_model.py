@@ -2,17 +2,17 @@ FOLDER_TEST = "exame-pulmao"
 TRAIN_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/output-2d/HMV-HCPA-tf12-all/" + FOLDER_TEST
 VALIDATION_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/output-2d/HMV-HCPA-tf12-all/" + FOLDER_TEST
 
-SUB_FILE = ['axis1', 'axis2']
-# SUB_FILE = ['axis1']
+# SUB_FILE = ['axis1', 'axis2']
+SUB_FILE = ['axis2']
 
 
-EPOCHS = 15
+EPOCHS = 10
 IMG_HEIGHT = 448
 IMG_WIDTH = 448
 IMG_CHANNELS = 3
 SELECTED_MODEL = ''
 NUM_CLASSES = 2
-DATA_FOLDER = 'finalv1/'
+DATA_FOLDER = 'decovnet/'
 LOG_FOLDER = 'logs/' + DATA_FOLDER
 TRAINING_FOLDER = 'training/' + DATA_FOLDER
 MODEL_FOLDER = 'models/' + DATA_FOLDER
@@ -329,12 +329,12 @@ for axis in SUB_FILE:
     confusion_matrix = np.zeros(labels_length*labels_length).reshape(labels_length, labels_length)
     ''''''
     
-    for n_fold in [1]:
-#     for n_fold in [j+1 for j in range(5)]:
+#     for n_fold in [2, 3, 4]:
+    for n_fold in [j+1 for j in range(5)]:
         print("\n\n\nFold", str(n_fold))
         
-        data_train = pd.read_csv("{}/train/train{}_binario.csv".format(STRUCTURE_DATASET_FOLDER, n_fold))
-        data_validation = pd.read_csv("{}/test/test{}_binario.csv".format(STRUCTURE_DATASET_FOLDER, n_fold))
+        data_train = pd.read_csv("{}/train/train{}.csv".format(STRUCTURE_DATASET_FOLDER, n_fold))
+        data_validation = pd.read_csv("{}/test/test{}.csv".format(STRUCTURE_DATASET_FOLDER, n_fold))
         train_df, validation_df = get_data_set(n_fold, axis, data_train, data_validation)
         data_validation_dict = dict(zip(data_validation.nome, data_validation.covid))
         

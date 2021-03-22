@@ -1,0 +1,78 @@
+fold,patient,real,predicted,count
+1,C26,covid,covid,77
+1,C14,covid,covid,82
+1,C36,covid,covid,82
+1,C41,covid,covid,82
+1,C20,covid,covid,82
+1,C79,covid,covid,82
+1,C80,covid,covid,82
+1,C82,covid,non covid,56
+1,C85,covid,covid,82
+1,C94,covid,covid,53
+1,C101,covid,covid,82
+1,C103,covid,covid,82
+1,C114,covid,covid,72
+1,C149,covid,covid,82
+1,C154,covid,covid,82
+1,C155,covid,covid,82
+1,C161,covid,covid,80
+1,TYP-026,covid,covid,82
+1,TYP-024,covid,covid,82
+1,TYP-018,covid,covid,82
+1,TYP-023,covid,covid,82
+1,TYP-008,covid,covid,82
+1,C29,non covid,non covid,82
+1,C65,non covid,non covid,44
+1,C70,non covid,non covid,82
+1,C76,non covid,non covid,82
+1,C86,non covid,non covid,82
+1,C92,non covid,non covid,82
+1,C97,non covid,non covid,82
+1,C102,non covid,non covid,82
+1,C109,non covid,covid,82
+1,C123,non covid,non covid,74
+1,C129,non covid,covid,78
+1,C139,non covid,non covid,81
+1,C147,non covid,non covid,82
+1,C8,non covid,non covid,82
+1,NEG-013,non covid,non covid,82
+1,NEG-004,non covid,non covid,82
+1,NEG-015,non covid,non covid,82
+1,IND-025,non covid,non covid,59
+1,IND-021,non covid,non covid,80
+1,IND-024,non covid,non covid,82
+1,IND-006,non covid,non covid,82
+1,IND-030,non covid,non covid,81
+1,IND-017,non covid,covid,60
+1,IND-010,non covid,non covid,82
+1,IND-015,non covid,covid,82
+1,IND-014,non covid,non covid,82
+1,IND-003,non covid,non covid,82
+1,ATY-020,non covid,non covid,82
+1,ATY-018,non covid,non covid,82
+1,ATY-001,non covid,non covid,82
+1,ATY-019,non covid,non covid,82
+1,N160,covid,non covid,63
+1,N165,non covid,non covid,82
+1,N174,non covid,non covid,82
+1,N176,non covid,non covid,51
+1,N177,non covid,non covid,82
+1,N182,non covid,non covid,82
+1,N183,non covid,non covid,82
+1,N209,non covid,non covid,82
+1,N212,non covid,non covid,82
+1,N219,non covid,non covid,82
+1,N223,non covid,non covid,82
+1,N230,covid,non covid,82
+1,N231,non covid,non covid,82
+1,N234,non covid,non covid,82
+1,N235,non covid,non covid,82
+1,N240,non covid,non covid,82
+1,N249,non covid,non covid,82
+1,N252,non covid,non covid,82
+1,N265,non covid,non covid,82
+1,N269,non covid,non covid,54
+1,N270,non covid,non covid,68
+1,N272,non covid,non covid,82
+1,N288,non covid,non covid,82
+1,N295,non covid,non covid,82

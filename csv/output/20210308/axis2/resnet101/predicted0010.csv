@@ -1,0 +1,13 @@
+fold,patient,real,predicted,count
+2,IND-030,others,others,82
+2,C38,others,others,82
+2,ATY-026,others,others,82
+2,N165,others,others,82
+2,NEG-010,others,others,82
+2,N299,others,others,82
+2,TYP-022,covid,others,80
+2,TYP-025,covid,covid,82
+2,TYP-003,covid,covid,75
+2,C79,covid,covid,82
+2,C11,covid,others,72
+2,N238,covid,others,80
