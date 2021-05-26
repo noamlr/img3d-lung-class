@@ -6,7 +6,7 @@ VALIDATION_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/output-2
 SUB_FILE = ['axis2']
 
 
-EPOCHS = 10
+EPOCHS = 50
 IMG_HEIGHT = 448
 IMG_WIDTH = 448
 IMG_CHANNELS = 3
@@ -158,7 +158,7 @@ def get_model_resnet101():
         
         model = tf.keras.Model(inputs=conv_base.input, outputs=preds)
         model.compile(optimizer=tf.keras.optimizers.Adam(lr=2e-5),
-                      loss='binary_crossentropy', metrics=['accuracy'])
+                      loss='binary_crossentropy', metrics=['accuracy']) ##################
         model.summary()
         return (model, 'resnet101')
     
@@ -330,7 +330,8 @@ for axis in SUB_FILE:
     ''''''
     
 #     for n_fold in [2, 3, 4]:
-    for n_fold in [j+1 for j in range(5)]:
+    # for n_fold in [j+1 for j in range(5)]:
+    for n_fold in [3, 4, 5]:
         print("\n\n\nFold", str(n_fold))
         
         data_train = pd.read_csv("{}/train/train{}.csv".format(STRUCTURE_DATASET_FOLDER, n_fold))
