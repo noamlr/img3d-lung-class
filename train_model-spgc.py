@@ -1,17 +1,19 @@
-TRAIN_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/spgc/views"
-VALIDATION_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/spgc/views"
+TRAIN_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/spgc/views66_384"
+VALIDATION_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/spgc/views66_384"
 
 SUB_FILE = ['axis1', 'axis2']
 # SUB_FILE = ['axis2']
 
 
-EPOCHS = 50
-IMG_HEIGHT = 448
-IMG_WIDTH = 448
+EPOCHS = 20
+IMG_HEIGHT = 384 #320 #224
+IMG_WIDTH = 384 #320 #224
 IMG_CHANNELS = 3
 SELECTED_MODEL = ''
 NUM_CLASSES = 3
-DATA_FOLDER = 'spgc-ternario-42img/'
+ACCURACY = 'accuracy'
+# ACCURACY = 'binary_accuracy'
+DATA_FOLDER = 'spgc-ternario-tf66-384x384/'
 LOG_FOLDER = 'logs/' + DATA_FOLDER
 TRAINING_FOLDER = 'training/' + DATA_FOLDER
 MODEL_FOLDER = 'models/' + DATA_FOLDER
@@ -42,6 +44,7 @@ import os
 from datetime import datetime
 
 import tensorflow as tf
+from tensorflow.keras.metrics import binary_accuracy, categorical_accuracy
 import utilities.plot_metrics as pm
 
 
@@ -136,10 +139,11 @@ def get_data_generator(dataframe, x_col, y_col, subset=None, shuffle=True, batch
 
 
 def get_base_model():
-#     base_model = tf.keras.applications.ResNet101(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
+    base_model = tf.keras.applications.ResNet101(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
     # base_model = tf.keras.applications.DenseNet121(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
     # base_model = tf.keras.applications.DenseNet169(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
-    base_model = tf.keras.applications.DenseNet201(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
+    # base_model = tf.keras.applications.DenseNet201(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
+    # base_model = tf.keras.applications.EfficientNetB0(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
     return base_model
 
 
@@ -158,20 +162,30 @@ def get_model_densenet121():
         x = tf.keras.layers.Dense(1024, activation = 'relu')(x)
         x = tf.keras.layers.Dropout(0.2)(x)
         x = tf.keras.layers.BatchNormalization()(x)
-        preds = tf.keras.layers.Dense(units=NUM_CLASSES, activation = 'softmax')(x) # Ternary
-        # preds = tf.keras.layers.Dense(units=NUM_CLASSES, activation = 'softmax')(x) # Binary
+        preds = None
+        if NUM_CLASSES > 2:
+            preds = tf.keras.layers.Dense(units=NUM_CLASSES, activation = 'softmax')(x) # Ternary
+        else:
+            preds = tf.keras.layers.Dense(units=1, activation = 'sigmoid')(x) # Binary Just one node for output # Change to NUM_CLASSES to get the one hot encoding
         
         model = tf.keras.Model(inputs=conv_base.input, outputs=preds)
-        model.compile(optimizer=tf.keras.optimizers.Adam(lr=2e-5),
-                      loss='categorical_crossentropy', metrics=['accuracy']) # Ternary
-                      # loss='binary_crossentropy', metrics=['accuracy']) # Binary
+
+        if NUM_CLASSES > 2:
+            model.compile(optimizer=tf.keras.optimizers.Adam(lr=2e-5), loss='categorical_crossentropy', metrics=['accuracy']) # Ternary
+        else:
+            model.compile(optimizer=tf.keras.optimizers.Adam(lr=2e-5), loss='binary_crossentropy', metrics=[binary_accuracy]) # Binary-one-hot-encoding
+            # model.compile(optimizer=tf.keras.optimizers.Adam(lr=2e-5), loss='binary_crossentropy', metrics=[binary_accuracy]) # Binary-floating number
+            
         model.summary()
-        return (model, 'densenet201')
+        return (model, 'resnet101-bin_cross')
     
 def train_model(model, train_df, validation_df, epochs, fold='', axis=''):
-    batch_size = 6
-    train_generator = get_data_generator(train_df, "id", "label", batch_size=batch_size, class_mode="categorical")
-    validation_generator = get_data_generator(validation_df, "id", "label", batch_size=batch_size, class_mode="categorical")
+    batch_size = 8
+    mode = "binary"
+    if NUM_CLASSES > 2:
+        mode = "categorical"
+    train_generator = get_data_generator(train_df, "id", "label", batch_size=batch_size, class_mode=mode)
+    validation_generator = get_data_generator(validation_df, "id", "label", batch_size=batch_size, class_mode=mode)
 
     print(train_generator.class_indices)
     print(validation_generator.class_indices)
@@ -234,7 +248,8 @@ def train_model(model, train_df, validation_df, epochs, fold='', axis=''):
     cp_callback = tf.keras.callbacks.ModelCheckpoint(
         filepath=checkpoint_path, 
         verbose=1,
-        monitor='val_accuracy',
+        monitor='val_' + ACCURACY,
+        # monitor='val_accuracy',
         mode='max',
         save_best_only=True
     )
@@ -265,8 +280,8 @@ def train_model(model, train_df, validation_df, epochs, fold='', axis=''):
 
 
 def plot_results(history, sub_folder, fold, sel_model):
-    acc = history['accuracy']
-    val_acc = history['val_accuracy']
+    acc = history[ACCURACY]
+    val_acc = history['val_' + ACCURACY]
     loss = history['loss']
     val_loss = history['val_loss']
 
@@ -294,9 +309,10 @@ def plot_results(history, sub_folder, fold, sel_model):
     epochs = range(1, len(acc) + 1)
     plt.plot(epochs, acc, 'bo', label='Training acc')
     plt.plot(epochs, val_acc, 'b', label='Validation acc')
-    plt.title('Training and Validation accuracy')
+    plt.title('Training and Validation accuracy') 
     plt.legend()
-    plt.savefig(image_dir + 'accuracy', pad_inches=0.1)
+    
+    plt.savefig(image_dir + ACCURACY, pad_inches=0.1)
     
     plt.figure()
     plt.plot(epochs, loss, 'bo', label='Training loss')
