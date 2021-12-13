@@ -1,19 +1,20 @@
-TRAIN_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/spgc/views66_384"
-VALIDATION_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/spgc/views66_384"
+TRAIN_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/spgc/views64"
+VALIDATION_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/spgc/views64"
 
-SUB_FILE = ['axis1', 'axis2']
-# SUB_FILE = ['axis2']
+# SUB_FILE = ['axis1', 'axis2']
+SUB_FILE = ['axis2']
 
 
-EPOCHS = 20
-IMG_HEIGHT = 384 #320 #224
-IMG_WIDTH = 384 #320 #224
+EPOCHS = 30
+IMG_HEIGHT = 448 #384 #320 #224
+IMG_WIDTH = 448 #384 #320 #224
 IMG_CHANNELS = 3
 SELECTED_MODEL = ''
 NUM_CLASSES = 3
 ACCURACY = 'accuracy'
 # ACCURACY = 'binary_accuracy'
-DATA_FOLDER = 'spgc-ternario-tf66-384x384/'
+# DATA_FOLDER = 'spgc-ternario-thiago/'
+DATA_FOLDER = 'spgc-ternario-tf64-altis/' 
 LOG_FOLDER = 'logs/' + DATA_FOLDER
 TRAINING_FOLDER = 'training/' + DATA_FOLDER
 MODEL_FOLDER = 'models/' + DATA_FOLDER
@@ -139,6 +140,7 @@ def get_data_generator(dataframe, x_col, y_col, subset=None, shuffle=True, batch
 
 
 def get_base_model():
+    # base_model = tf.keras.applications.vgg16.VGG16(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
     base_model = tf.keras.applications.ResNet101(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
     # base_model = tf.keras.applications.DenseNet121(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
     # base_model = tf.keras.applications.DenseNet169(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
