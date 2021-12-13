@@ -1,10 +1,10 @@
-TRAIN_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/hmv-hcpa/views66/"
-VALIDATION_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/hmv-hcpa/views66/"
+TRAIN_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/hmv-hcpa/views64/"
+VALIDATION_IMG_SRC_FOLDER = "/home/guilherme/Documents/noa/cidia19/data/hmv-hcpa/views64/"
 
-# SUB_FILE = ['axis1', 'axis2']
-SUB_FILE = ['axis1']
+SUB_FILE = ['axis1', 'axis2']
+# SUB_FILE = ['axis1']
 
-EPOCHS = 10
+EPOCHS = 20
 IMG_HEIGHT = 448
 IMG_WIDTH = 448
 IMG_CHANNELS = 3
@@ -12,7 +12,7 @@ SELECTED_MODEL = ''
 NUM_CLASSES = 2
 ACCURACY = 'binary_accuracy'
 # ACCURACY = 'accuracy'
-DATA_FOLDER = 'hh-densenet201/'
+DATA_FOLDER = 'hh-tf64-altis/'
 LOG_FOLDER = 'logs/' + DATA_FOLDER
 TRAINING_FOLDER = 'training/' + DATA_FOLDER
 MODEL_FOLDER = 'models/' + DATA_FOLDER
@@ -137,7 +137,7 @@ def get_data_generator(dataframe, x_col, y_col, subset=None, shuffle=True, batch
 
 
 def get_base_model():
-    base_model = tf.keras.applications.DenseNet201(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
+    base_model = tf.keras.applications.ResNet101(weights='imagenet', include_top=False, input_shape=(IMG_HEIGHT, IMG_WIDTH, 3))
     return base_model
 
 
@@ -343,8 +343,7 @@ for axis in SUB_FILE:
     confusion_matrix = np.zeros(labels_length*labels_length).reshape(labels_length, labels_length)
     ''''''
     
-    # for n_fold in [1, 2, 3, 4, 5]:
-    for n_fold in [5]:
+    for n_fold in [1, 2, 3, 4, 5]:
 #    for n_fold in [j+1 for j in range(5)]:
 #     for n_fold in [1]:
         print("\n\n\nFold", str(n_fold))
